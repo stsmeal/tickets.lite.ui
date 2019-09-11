@@ -1,0 +1,207 @@
+@import '~@angular/material/theming';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-blue-grey, 400, 700, A300);
+$my-app-accent:  mat-palette($mat-grey, 200, 400, A100);
+$my-app-warn:    mat-palette($mat-red, 500, 900, A100);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include angular-material-theme($my-app-theme);
+
+.mat-toolbar {
+    box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.05), 0 1px 20px 0 rgba(0, 0, 0, 0.11);
+}
+
+.mat-form-field{
+    width: 100%;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 52px !important;
+}
+
+.info-snackbar {
+  background-color: rgba(62, 191, 168, 0.75);
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.success-snackbar {
+  background-color: rgba(6, 188, 90, 0.75);
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.warning-snackbar {
+  background: rgba(249, 122, 31, 0.75);
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.error-snackbar {
+  background-color: rgba(255, 0, 0, 0.74);
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.mat-simple-snackbar-action {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+
+.mat-chip {
+  font-size: 10px !important;
+}
+
+.mat-standard-chip {
+  padding: 4px 8px !important;
+  min-height: 18px !important;
+  border-radius: 18px !important;
+}
+
+
+html,
+body {
+    margin: 0px;
+    height: 100%;
+    background-color: #fafafa;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+a { color: inherit; text-decoration: inherit; } 
+
+table {
+  width: 100%;
+}
+
+.container {
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container.padded {
+    padding: 15px;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .pull-right {
+    float: right;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .no-padding {
+    padding: 0px;
+  }
+
+  .side-padding {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+.container-page {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-grid {
+  width: 100%;
+  overflow-x: auto;
+  tbody {
+      tr {
+          cursor: pointer;
+          opacity: 0.8;
+
+          &:hover {
+              opacity: 1;
+          }
+      }
+  }
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding: 0px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-page {
+    padding: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-page {
+    padding: 45px;
+  }
+}
+
+ $class-col: col !default;
+
+@for $i from 1 through 12 {
+    .#{$class-col}-#{$i},
+    .#{$class-col}-sm-#{$i},
+    .#{$class-col}-md-#{$i},
+    .#{$class-col}-lg-#{$i} {
+      width: $i / 12 * 100%;
+      float: left;
+    }
+    
+    .#{$class-col}-offset-#{$i},
+    .#{$class-col}-sm-offset-#{$i},
+    .#{$class-col}-md-offset-#{$i},
+    .#{$class-col}-lg-offset-#{$i} {
+      margin-left: $i / 12 * 100%;
+    }
+
+    @media (max-width: 768px) {
+      .#{$class-col}-sm-#{$i} {
+          width: 100%;
+          float: left;
+      }
+    
+      .#{$class-col}-sm-offset-#{$i} {
+          margin-left: 0;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .#{$class-col}-md-#{$i} {
+          width: 100%;
+          float: left;
+      }
+    
+      .#{$class-col}-md-offset-#{$i} {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .#{$class-col}-lg-#{$i} {
+          width: 100%;
+          float: left;
+      }
+    
+      .#{$class-col}-lg-offset-#{$i} {
+          margin-left: 0;
+      }
+    }
+}

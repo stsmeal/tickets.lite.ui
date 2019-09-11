@@ -1,0 +1,9 @@
+.portal .mat-expansion-panel-header-title,
+.portal .mat-expansion-panel-header-description {
+  flex-basis: 0;
+  align-items: center;
+}
+
+.portal .mat-expansion-panel-header-description {
+  justify-content: space-between;
+}

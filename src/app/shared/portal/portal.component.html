@@ -1,0 +1,11 @@
+<mat-expansion-panel class="portal" [(expanded)]="expanded" [hideToggle]="hideToggle">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <ng-content select="[portal-title]"></ng-content>
+        </mat-panel-title>
+        <mat-panel-description (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+            <ng-content select="[portal-toolbar]"></ng-content>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-content select="[portal-content]"></ng-content>
+</mat-expansion-panel>

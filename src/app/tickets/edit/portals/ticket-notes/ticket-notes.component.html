@@ -1,0 +1,43 @@
+<portal>
+    <ng-container portal-title>
+            <mat-chip-list><mat-chip selected color="primary"><b style="color: white">{{(notes)? notes.length : 0}}</b></mat-chip></mat-chip-list>
+        <span style="margin-left: 5px;">Notes</span>
+    </ng-container>
+    <ng-container portal-toolbar>
+        <div class="row" style="width: 100%">
+            <div class="col-12">
+                <button class="pull-right" mat-icon-button><mat-icon>add</mat-icon></button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container portal-content>
+            <table mat-table [dataSource]="notes" style="width: 100%">
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Type</th>
+                    <td mat-cell *matCellDef="let element"> {{ getNoteType(element.noteType) }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="note">
+                    <th mat-header-cell *matHeaderCellDef>Message</th>
+                    <td mat-cell *matCellDef="let element"> {{ element.message }} </td>
+                </ng-container>
+
+                
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element"> 
+                         <button mat-icon-button matTooltip="Delete" color="warn" (click)="delete(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['type', 'note', 'delete']; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['type', 'note', 'delete'];" (click)="edit(row)"></tr>
+            </table>
+    </ng-container>
+</portal>
+
+<ng-template #noteModal>
+
+</ng-template>
