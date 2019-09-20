@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 
 @Component({
     selector: 'sign-in',
@@ -24,9 +25,9 @@ export class SignInComponent {
         this.signInText = "Signing In...";
         this.auth.authenticate(this.username.value, this.password.value).subscribe(
             (response: any) => {
-                const {token, ...user} = response;
+                const {token, user} = response;
                 this.auth.token = token;
-                this.auth.user = {...user};
+                this.auth.user = <User>user;
                 this.auth.rememberMe = this.rememberMe;
                 this.authenticating = false;
                 this.router.navigate(['/tickets']);

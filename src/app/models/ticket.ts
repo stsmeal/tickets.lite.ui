@@ -10,8 +10,8 @@ export class Ticket extends Audit {
     status: number;
     category: number;
     dateCompleted: Date;
-    notes: Note[];
-    laborCharges: LaborCharge[];
-    assignments: User[];
-    assets: Asset[];
+    notes: Note[] = [];
+    laborCharges: LaborCharge[] = [];
+    assignments: User[] = [];
+    assets: Asset[] = [];
 }

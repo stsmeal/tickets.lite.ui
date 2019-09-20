@@ -3,6 +3,7 @@ import * as config from '../config.json';
 import { HttpClient } from '@angular/common/http';
 import * as localForage from 'localforage';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.js';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService{
     private readonly REMEMBER_ME_KEY = 'cms_lite_remember_me';
 
     private _token: string;
-    private _user: any;
+    private _user: User;
     private _rememberMe: boolean;
     
     private localForage = localForage;
@@ -28,10 +29,10 @@ export class AuthService{
         this.localForage.setItem<string>(this.TOKEN_KEY, value);
     }
 
-    get user(): any {
+    get user(): User {
         return this._user;
     }
-    set user(value: any) {
+    set user(value: User) {
         this._user = value;
         this.localForage.setItem<any>(this.USER_KEY, value);
     }
@@ -59,7 +60,7 @@ export class AuthService{
                 this.token = token;
                 this.localForage.getItem<any>(this.USER_KEY).then(
                     (user: any) => {
-                        this.user = user;
+                        this.user = <User>user;
                         this.localForage.getItem<boolean>(this.REMEMBER_ME_KEY).then(
                             (rememberMe: boolean) => {
                                 this.rememberMe = rememberMe;
