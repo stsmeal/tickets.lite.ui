@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TicketEditComponent implements OnInit {
     public loading: boolean = false;
-    public ticket: Ticket;
+    public ticket: Ticket = new Ticket();
 
     constructor(
         public ticketService: TicketService,

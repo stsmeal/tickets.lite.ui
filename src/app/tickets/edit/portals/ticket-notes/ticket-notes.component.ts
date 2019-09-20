@@ -1,12 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, AfterContentChecked } from "@angular/core";
 import { Note } from 'src/app/models/note';
+import { ModalService } from 'src/app/services/modal.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'ticket-notes-portal',
     templateUrl: 'ticket-notes.component.html'
 })
-export class TicketNotesPortalComponent implements OnInit{
-    private readonly NoteTypes = [{
+export class TicketNotesPortalComponent implements OnInit, AfterContentChecked{
+    public readonly NoteTypes = [{
         id: 1,
         label: 'Request'
     },{
@@ -15,19 +17,33 @@ export class TicketNotesPortalComponent implements OnInit{
     },{
         id: 3,
         label: 'Complete'
-    }]
+    }];
+
     @Input() 
     get notes() {
         return this.notesValue;
     }
     set notes(val: Note[]) {
         this.notesValue = val;
-        this.notesChange.emit(val);
+        this.notesChange.emit(this.notesValue);
     }
 
     @Output() notesChange: EventEmitter<Note[]> = new EventEmitter<Note[]>();
 
-    private notesValue: Note[];
+    
+    @ViewChild('noteModal', { static: true }) noteModal: TemplateRef<any>;
+
+    public note: Note;
+    public modalRef: MatDialogRef<any>;
+
+    private notesValue: Note[] = [];
+
+    private noteIndex: number;
+
+    constructor(
+        private modalService: ModalService,
+        private cdref: ChangeDetectorRef
+    ){}
 
     public ngOnInit(): void {
         if(!this.notes){
@@ -35,14 +51,44 @@ export class TicketNotesPortalComponent implements OnInit{
         }
     }
 
-    public edit(note?: Note): void {
+    public ngAfterContentChecked(): void {
+        this.cdref.detectChanges();
+    }
 
+    public edit(note?: Note): void {
+        if(!note){
+            this.note = new Note();
+            this.note.type = 2;
+        } else {
+            this.note = note;
+        }
+
+        this.noteIndex = this.notes.findIndex(n => n == note);
+
+        this.modalRef = this.modalService.open(this.noteModal, { width: '1200px'});
+
+        this.modalRef.afterClosed().subscribe(
+            (_note: Note) => {
+                if(_note){
+                    _note.dateUpdated = new Date();
+
+                    if(this.noteIndex >= 0){
+                        this.notes[this.noteIndex] = _note;
+                    } else {
+                        _note.dateCreated = new Date();
+                        this.notes.push(_note);
+                    }
+
+                    this.notes = this.notes.slice();
+                }
+        });
     }
 
     public delete(note: Note): void {
         let ix = this.notes.findIndex(n => n == note);
         if(ix > -1){
-            this.notes.slice(ix, 1);
+            this.notes.splice(ix, 1);
+            this.notes = this.notes.slice();
         }
     }
 
