@@ -100,12 +100,15 @@ export class TicketService {
         return this.api.get('ticket');
     }
     
-
     public getTicket(id: string): Observable<Ticket> {
         return this.api.get(`ticket/${id}`);
     }
 
     public saveTicket(ticket: Ticket) {
         return this.api.post('ticket', ticket);
+    }
+
+    public deleteTicket(id: string): Observable<Ticket> {
+        return this.api.delete('ticket/' + id);
     }
 }

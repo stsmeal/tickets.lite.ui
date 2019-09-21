@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
 <mat-toolbar color='accent'>
     <h1 color='primary'>Tickets</h1>
     <span style="flex: 1 1 auto"></span>
@@ -6,7 +7,6 @@
             <mat-icon>add</mat-icon>
         </button></a>
 </mat-toolbar>
-<mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
 <div *ngIf="!loading" class="container-page">
     <mat-card>
         <mat-card-content>
