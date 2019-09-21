@@ -6,4 +6,5 @@ export class Audit {
     dateCreated: Date;
     userUpdated: User;
     dateUpdated: Date;
+    deleted: boolean;
 }

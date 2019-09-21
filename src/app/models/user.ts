@@ -9,4 +9,5 @@ export class User {
     role: string;
     phone: string;
     theme: string;
+    deleted: boolean;
 }
