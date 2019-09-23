@@ -21,6 +21,7 @@ import { GridComponent } from './shared/grid/grid.component';
 import { ModalComponent } from './shared/modal.component';
 import { PortalComponent } from './shared/portal/portal.component';
 import { TicketNotesPortalComponent } from './tickets/edit/portals/ticket-notes/ticket-notes.component';
+import { AssignmentsPortalComponent } from './tickets/edit/portals/assignments/assignments-portal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
     GridComponent,
     ModalComponent,
     PortalComponent,
-    TicketNotesPortalComponent
+    TicketNotesPortalComponent,
+    AssignmentsPortalComponent
   ],
   imports: [
     BrowserModule,
