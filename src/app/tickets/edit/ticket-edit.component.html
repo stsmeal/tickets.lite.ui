@@ -61,13 +61,7 @@
                                 </mat-expansion-panel-header>
                             </mat-expansion-panel>
                             <assignments-portal [(assignments)]="ticket.assignments"></assignments-portal>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Labor Charges
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                            </mat-expansion-panel>
+                            <labor-charge-portal [(laborCharges)]="ticket.laborCharges"></labor-charge-portal>
                         </mat-accordion>
                     </div>
                 </div>

@@ -3,21 +3,21 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'datetime-input',
   template: `
-<table style="width: 100%" cellspacing="0"><tr>
-    <td>
-        <date-input [label]="label"
-                        [max]="max"
-                        [value]="value"
-                        [disabled]="disabled || dateInputDisabled"
-                        [isDateDisabled]="isDateDisabled"
-                        (valueChange)="handleDateChange($event)"></date-input>
-</td>
-    <td>
-        <mat-form-field style="width: 100%">
-           <input matInput type="time" step="900" (change)="handleTimeChange($event?.srcElement?.valueAsDate)" [disabled]="disabled || timeInputDisabled || !value">
-         </mat-form-field>
-</td>
-  </tr></table>
+  <div class="row">
+    <div class="col-6">
+      <date-input [label]="label"
+                    [max]="max"
+                    [value]="value"
+                    [disabled]="disabled || dateInputDisabled"
+                    [isDateDisabled]="isDateDisabled"
+                    (valueChange)="handleDateChange($event)"></date-input>
+    </div>
+    <div class="col-6">
+      <mat-form-field style="width: 100%">
+        <input matInput type="time" step="900" (change)="handleTimeChange($event?.srcElement?.valueAsDate)" [disabled]="disabled || timeInputDisabled || !value">
+      </mat-form-field>
+    </div>
+  </div>
     `
 })
 export class DateTimeInputComponent {
