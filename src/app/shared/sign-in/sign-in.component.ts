@@ -35,7 +35,7 @@ export class SignInComponent {
                 this.router.navigate(['/tickets']);
             }, (error) => {
                 if(error.error == 'Incorrect Username or Password'){
-                    this.notification.error(error.error);//<-iconic
+                    this.notification.error('Incorrect Username or Password');
                 } else {
                     this.notification.error('An occurred while signing in');
                 }
