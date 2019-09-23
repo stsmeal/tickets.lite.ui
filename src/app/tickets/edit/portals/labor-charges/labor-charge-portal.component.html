@@ -1,0 +1,123 @@
+<portal>
+    <ng-container portal-title>
+        <mat-chip-list>
+            <mat-chip selected color="primary"><b style="color: white">{{(laborCharges)? laborCharges.length : 0}}</b>
+            </mat-chip>
+        </mat-chip-list>
+        <span style="margin-left: 5px;">Labor Charges</span>
+    </ng-container>
+    <ng-container portal-toolbar>
+        <div class="row" style="width: 100%">
+            <div class="col-12">
+                <button class="pull-right" mat-icon-button (click)="edit()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container portal-content>
+        <div class="container-grid">
+            <table mat-table [dataSource]="laborCharges" style="width: 100%">
+                <ng-container matColumnDef="assignment">
+                    <th mat-header-cell *matHeaderCellDef>Assignment</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ (element.assignment) ? element.assignment.lastname + ", " + element.assignment.firstname : ""}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Type</th>
+                    <td mat-cell *matCellDef="let element"> {{ getLaborChargeType(element.type) }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>Description</th>
+                    <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th width="30px" mat-header-cell *matHeaderCellDef></th>
+                    <td width="30px" mat-cell *matCellDef="let element">
+                        <button mat-icon-button matTooltip="Delete" color="warn" (click)="delete(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['type', 'assignment', 'description', 'delete']; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['type', 'assignment', 'description', 'delete'];" (click)="edit(row)"></tr>
+            </table>
+        </div>
+    </ng-container>
+</portal>
+
+<ng-template #laborChargeModal>
+    <modal>
+        <ng-container modal-title>
+            <h1 mat-dialog-title>Labor Charge</h1>
+        </ng-container>
+        <ng-container modal-content>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="side-padding">
+                        <mat-form-field>
+                            <mat-select [placeholder]="'Type'" [(ngModel)]="laborCharge.type">
+                                <mat-option *ngFor="let type of LaborChargeTypes" [value]="type.id">{{type.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="side-padding">
+                        <mat-form-field>
+                            <input matInput placeholder="Assignment" [(ngModel)]="searchText" (input)="change()"
+                                [matAutocomplete]="autoAssignmentsPortal">
+                            <mat-autocomplete #autoAssignmentsPortal="matAutocomplete"
+                                (optionSelected)="selection($event)">
+                                <mat-option *ngFor="let assignment of searchAssignments | async" [value]="assignment">
+                                    {{assignment.lastname + ", " + assignment.firstname}}</mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="side-padding">
+                        <datetime-input [label]="'Start Date'" [(value)]="laborCharge.dateStarted"></datetime-input>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="side-padding">
+                        <datetime-input [label]="'End Date'" [(value)]="laborCharge.dateEnded"></datetime-input>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="side-padding">
+                        <mat-form-field>
+                            <input matInput placeholder="Rate" type="number" [(ngModel)]="laborCharge.rate">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row side-padding">
+                <div class="col-12">
+                    <mat-form-field>
+                        <textarea matInput placeholder="Description" [(ngModel)]="laborCharge.description"
+                            [rows]="5"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container modal-footer>
+            <button class="btn pull-right" mat-button matTooltip="Save" color="primary"
+                (click)="modalRef.close(laborCharge)">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button class="btn pull-right" mat-button matTooltip="Cancel" color="warn" (click)="modalRef.close()">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </ng-container>
+    </modal>
+</ng-template>

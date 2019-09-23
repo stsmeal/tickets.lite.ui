@@ -22,6 +22,7 @@ import { ModalComponent } from './shared/modal.component';
 import { PortalComponent } from './shared/portal/portal.component';
 import { TicketNotesPortalComponent } from './tickets/edit/portals/ticket-notes/ticket-notes.component';
 import { AssignmentsPortalComponent } from './tickets/edit/portals/assignments/assignments-portal.component';
+import { LaborChargePortalComponent } from './tickets/edit/portals/labor-charges/labor-charge-portal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -46,7 +47,8 @@ const routes: Routes = [
     ModalComponent,
     PortalComponent,
     TicketNotesPortalComponent,
-    AssignmentsPortalComponent
+    AssignmentsPortalComponent,
+    LaborChargePortalComponent
   ],
   imports: [
     BrowserModule,

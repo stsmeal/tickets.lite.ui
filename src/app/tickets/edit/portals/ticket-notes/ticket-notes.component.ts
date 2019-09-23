@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, AfterContentChecked } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { Note } from 'src/app/models/note';
 import { ModalService } from 'src/app/services/modal.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,7 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     selector: 'ticket-notes-portal',
     templateUrl: 'ticket-notes.component.html'
 })
-export class TicketNotesPortalComponent implements OnInit, AfterContentChecked{
+export class TicketNotesPortalComponent implements OnInit{
     public readonly NoteTypes = [{
         id: 1,
         label: 'Request'
@@ -40,19 +40,12 @@ export class TicketNotesPortalComponent implements OnInit, AfterContentChecked{
 
     private noteIndex: number;
 
-    constructor(
-        private modalService: ModalService,
-        private cdref: ChangeDetectorRef
-    ){}
+    constructor(private modalService: ModalService){}
 
     public ngOnInit(): void {
         if(!this.notes){
             this.notes = [];
         }
-    }
-
-    public ngAfterContentChecked(): void {
-        this.cdref.detectChanges();
     }
 
     public edit(note?: Note): void {
