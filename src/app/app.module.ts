@@ -23,12 +23,17 @@ import { PortalComponent } from './shared/portal/portal.component';
 import { TicketNotesPortalComponent } from './tickets/edit/portals/ticket-notes/ticket-notes.component';
 import { AssignmentsPortalComponent } from './tickets/edit/portals/assignments/assignments-portal.component';
 import { LaborChargePortalComponent } from './tickets/edit/portals/labor-charges/labor-charge-portal.component';
+import { AssetsMainComponent } from './inventory/main/assets-main.component';
+import { AssetEditComponent } from './inventory/edit/asset-edit.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
   { path: 'tickets', component: TicketsMainComponent, canActivate: [AuthGuard] },
   { path: 'tickets/new', component: TicketEditComponent, canActivate: [AuthGuard] },
   { path: 'tickets/:id', component: TicketEditComponent, canActivate: [AuthGuard] },
+  { path: 'inventory', component: AssetsMainComponent, canActivate: [AuthGuard] },
+  { path: 'inventory/new', component: AssetEditComponent, canActivate: [AuthGuard] },
+  { path: 'inventory/:id', component: AssetEditComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: LogInComponent }
 ];
 
@@ -48,7 +53,9 @@ const routes: Routes = [
     PortalComponent,
     TicketNotesPortalComponent,
     AssignmentsPortalComponent,
-    LaborChargePortalComponent
+    LaborChargePortalComponent,
+    AssetsMainComponent,
+    AssetEditComponent
   ],
   imports: [
     BrowserModule,

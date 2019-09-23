@@ -1,34 +1,36 @@
 import { Component, OnInit } from "@angular/core";
-import { Ticket } from 'src/app/models/ticket';
-import { TicketService } from '../ticket.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Asset } from 'src/app/models/asset';
+import { InventoryService } from '../inventory.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
-    templateUrl: 'ticket-edit.component.html'
+    templateUrl: 'asset-edit.component.html'
 })
-export class TicketEditComponent implements OnInit {
+export class AssetEditComponent implements OnInit {
     public isEdit: boolean = false;
     public loading: boolean = false;
-    public ticket: Ticket = new Ticket();
+    public asset: Asset = new Asset();
+
 
     constructor(
-        public ticketService: TicketService,
+        public inventoryService: InventoryService,
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
         private notification: NotificationService) {}
 
+        
     public ngOnInit(): void {
         this.route.paramMap.subscribe(
             (params: ParamMap) =>{
                 if(params.has('id')){
                     this.isEdit = true;
                     this.loading = true;
-                    this.ticketService.getTicket(params.get('id')).subscribe(
-                        (ticket: Ticket) => {
-                            this.ticket = ticket;
+                    this.inventoryService.getAsset(params.get('id')).subscribe(
+                        (asset: Asset) => {
+                            this.asset = asset;
                             this.loading = false;
                         },
                         (error) => {
@@ -37,7 +39,7 @@ export class TicketEditComponent implements OnInit {
                         }
                     )
                 } else {
-                    this.ticket = new Ticket();
+                    this.asset = new Asset();
                 }
             }
         );
@@ -45,17 +47,17 @@ export class TicketEditComponent implements OnInit {
 
     public save(): void {
         this.loading = true;
-        this.ticket.dateCreated = new Date();
-        this.ticket.userCreated = this.auth.user;
-        this.ticketService.saveTicket(this.ticket).subscribe(
-            (ticket: Ticket) => {
-                this.notification.success('Ticket saved');
+        this.asset.dateCreated = new Date();
+        this.asset.userCreated = this.auth.user;
+        this.inventoryService.saveAsset(this.asset).subscribe(
+            (asset: Asset) => {
+                this.notification.success('Asset saved');
                 this.route.paramMap.subscribe(
                     (params: ParamMap) =>{
                         if(!params.has('id')){
-                            this.router.navigateByUrl('tickets/' + ticket._id);
+                            this.router.navigateByUrl('inventory/' + asset._id);
                         } else {
-                            this.ticket = ticket;
+                            this.asset = asset;
                             this.loading = false;
                         }
                     });
@@ -63,27 +65,29 @@ export class TicketEditComponent implements OnInit {
             (error) => {
                 console.log(error);
                 this.loading = false;
-                this.notification.error('Error while saving ticket');
+                this.notification.error('Error while saving asset');
             }
-        )
+        );
     }
+
+    
 
     public delete(): void {
         this.loading = true;
-        this.ticketService.deleteTicket(this.ticket._id).subscribe(
-            (ticket: Ticket) => {
-                if(ticket){
-                    this.router.navigateByUrl('tickets');
+        this.inventoryService.deleteAsset(this.asset._id).subscribe(
+            (asset: Asset) => {
+                if(asset){
+                    this.router.navigateByUrl('inventory');
                 } else {
-                    this.ticket = ticket;
-                    this.notification.error('Error while deleting ticket');
+                    this.asset = asset;
+                    this.notification.error('Error while deleting asset');
                 }
                 this.loading = false;
             }, 
             (error) => {
                 console.log(error);
                 this.loading = false;
-                this.notification.error('Error while deleting ticket');
+                this.notification.error('Error while deleting asset');
             }
         );
     }
