@@ -1,0 +1,51 @@
+<portal>
+        <ng-container portal-title>
+            <mat-chip-list>
+                <mat-chip selected color="primary"><b style="color: white">{{(assets)? assets.length : 0}}</b>
+                </mat-chip>
+            </mat-chip-list>
+            <span style="margin-left: 5px;">Assets</span>
+        </ng-container>
+        <ng-container portal-toolbar>
+            <div class="row" style="width: 100%">
+                <div class="col-12">
+                    <mat-form-field>
+                        <mat-icon matPrefix style="font-size: 100%;">add</mat-icon>
+                        <input matInput [(ngModel)]="searchText" (input)="change()"
+                            [matAutocomplete]="autoAssetsPortal">
+                        <mat-autocomplete #autoAssetsPortal="matAutocomplete" (optionSelected)="selection($event)">
+                            <mat-option *ngFor="let asset of searchAssets | async" [value]="asset">
+                                {{asset.number + " - " + asset.description}}</mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container portal-content>
+            <div class="container-grid">
+                <table mat-table [dataSource]="assets" style="width: 100%">
+                    <ng-container matColumnDef="number">
+                        <th mat-header-cell *matHeaderCellDef>Number</th>
+                        <td mat-cell *matCellDef="let element"> {{ element.number }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef>Description</th>
+                        <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="delete">
+                        <th width="30px" mat-header-cell *matHeaderCellDef></th>
+                        <td width="30px" mat-cell *matCellDef="let element">
+                            <button mat-icon-button matTooltip="Delete" color="warn" (click)="delete(element)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="['number', 'description', 'delete']; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['number', 'description', 'delete'];" (click)="edit(row)"></tr>
+                </table>
+            </div>
+        </ng-container>
+    </portal>

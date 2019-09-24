@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
