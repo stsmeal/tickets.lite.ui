@@ -86,7 +86,7 @@ export class TicketService {
                 }
             }
         }
-    ]
+    ];
 
     constructor(
         private api: ApiService,

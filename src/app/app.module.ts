@@ -25,6 +25,8 @@ import { AssignmentsPortalComponent } from './tickets/edit/portals/assignments/a
 import { LaborChargePortalComponent } from './tickets/edit/portals/labor-charges/labor-charge-portal.component';
 import { AssetsMainComponent } from './inventory/main/assets-main.component';
 import { AssetEditComponent } from './inventory/edit/asset-edit.component';
+import { UsersMainComponent } from './users/main/users-main.component';
+import { UserEditComponent } from './users/edit/user-edit.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -34,6 +36,9 @@ const routes: Routes = [
   { path: 'inventory', component: AssetsMainComponent, canActivate: [AuthGuard] },
   { path: 'inventory/new', component: AssetEditComponent, canActivate: [AuthGuard] },
   { path: 'inventory/:id', component: AssetEditComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersMainComponent, canActivate: [AuthGuard] },
+  { path: 'users/new', component: UserEditComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: LogInComponent }
 ];
 
@@ -55,7 +60,9 @@ const routes: Routes = [
     AssignmentsPortalComponent,
     LaborChargePortalComponent,
     AssetsMainComponent,
-    AssetEditComponent
+    AssetEditComponent,
+    UsersMainComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
