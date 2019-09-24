@@ -28,6 +28,8 @@ import { AssetEditComponent } from './inventory/edit/asset-edit.component';
 import { UsersMainComponent } from './users/main/users-main.component';
 import { UserEditComponent } from './users/edit/user-edit.component';
 import { AssetsPortalComponent } from './tickets/edit/portals/assets/assets-portal.component';
+import { UserLaborChargesPortalComponent } from './users/edit/portals/labor-charges/user-labor-charges-portal.component';
+import { UserTicketsPortalComponent } from './users/edit/portals/tickets/user-tickets-portal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -64,7 +66,9 @@ const routes: Routes = [
     AssetsMainComponent,
     AssetEditComponent,
     UsersMainComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserLaborChargesPortalComponent,
+    UserTicketsPortalComponent
   ],
   imports: [
     BrowserModule,

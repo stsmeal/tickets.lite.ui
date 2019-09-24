@@ -79,20 +79,8 @@
                     </div>
                     <div *ngIf="isEdit" class="row form-group side-padding">
                         <mat-accordion>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Labor Charges
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Tickets
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                            </mat-expansion-panel>
+                            <user-labor-charges-portal [user]="user"></user-labor-charges-portal>
+                            <user-tickets-portal [user]="user"></user-tickets-portal>
                         </mat-accordion>
                     </div>
                 </div>
