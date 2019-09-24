@@ -4,10 +4,10 @@ import { ModalService } from 'src/app/services/modal.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-    selector: 'ticket-notes-portal',
-    templateUrl: 'ticket-notes.component.html'
+    selector: 'notes-portal',
+    templateUrl: 'notes-portal.component.html'
 })
-export class TicketNotesPortalComponent implements OnInit{
+export class NotesPortalComponent implements OnInit{
     public readonly NoteTypes = [{
         id: 1,
         label: 'Request'
@@ -59,6 +59,15 @@ export class TicketNotesPortalComponent implements OnInit{
         this.noteIndex = this.notes.findIndex(n => n == note);
 
         this.modalRef = this.modalService.open(this.noteModal, { width: '1200px'});
+
+        this.modalRef.afterOpened().subscribe(() => {
+            setTimeout(() => {
+                let messageInput: HTMLElement = document.getElementById('messageArea');
+                if(messageInput){
+                    messageInput.focus();
+                }
+            });
+        })
 
         this.modalRef.afterClosed().subscribe(
             (_note: Note) => {
