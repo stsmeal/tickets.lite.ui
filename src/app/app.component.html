@@ -8,14 +8,20 @@
     <mat-toolbar *ngIf="auth.isAuthenticated" color='primary'>
       <button *ngIf="isSmallScreen" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
       <mat-menu #menu="matMenu">
-          <button mat-menu-item><a href="/tickets"><mat-icon>work</mat-icon>Tickets</a></button>
-          <button mat-menu-item><a href="/inventory"><mat-icon>build</mat-icon>Inventory</a></button>
-          <button mat-menu-item><a href="/tickets"><mat-icon>supervisor_account</mat-icon>Users</a></button>
+          <button mat-menu-item (click)="$event.preventDefault()"
+          [routerLink]="['/tickets']"><a href="/tickets"><mat-icon>work</mat-icon>Tickets</a></button>
+          <button mat-menu-item (click)="$event.preventDefault()"
+          [routerLink]="['/inventory']"><a href="/inventory"><mat-icon>build</mat-icon>Inventory</a></button>
+          <button mat-menu-item (click)="$event.preventDefault()"
+          [routerLink]="['/users']"><a href="/users"><mat-icon>supervisor_account</mat-icon>Users</a></button>
       </mat-menu>
       <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
-      <a href="/tickets" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;">Tickets</button></a>
-      <a href="/inventory" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;">Inventory</button></a>
-      <a href="/" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;">Users</button></a>
+      <a href="/tickets" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+        [routerLink]="['/tickets']">Tickets</button></a>
+      <a href="/inventory" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+        [routerLink]="['/inventory']">Inventory</button></a>
+      <a href="/users" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+        [routerLink]="['/users']">Users</button></a>
       <span style="flex: 1 1 auto"></span>
       <button mat-flat-button color='primary' (click)="signOut()">Sign Out</button>
     </mat-toolbar>
