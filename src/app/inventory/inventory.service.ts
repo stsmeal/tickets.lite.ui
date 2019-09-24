@@ -24,6 +24,21 @@ export class InventoryService {
         {id: 5, label: 'Other' },
     ];
 
+    public readonly conditions = [
+        {id: 1, label: 'New' },
+        {id: 2, label: 'Good' },
+        {id: 3, label: 'Fair' },
+        {id: 4, label: 'Poor' },
+        {id: 5, label: 'Broken' }
+    ];
+
+    public readonly lifeExpectancyScales = [
+        {id: 1, label: 'Days' },
+        {id: 2, label: 'Weeks' },
+        {id: 3, label: 'Months' },
+        {id: 4, label: 'Years' }
+    ];
+
     private readonly columns: GridColumn[] = [
         <GridColumn>{
             name: 'number',

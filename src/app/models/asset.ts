@@ -5,4 +5,9 @@ export class Asset extends Audit {
     description: string;
     status: number;
     category: number;
+    lifeExpectancy: number;
+    lifeExpectancyScale: number;
+    installDate: Date;
+    condition: number;
+    retiredDate: Date;
 }

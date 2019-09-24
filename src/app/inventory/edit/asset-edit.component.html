@@ -25,6 +25,20 @@
                             <textarea matInput placeholder="Description" [(ngModel)]="asset.description"></textarea>
                         </mat-form-field>
                     </div>
+                    <div class="row form-group side-padding">
+                        <datetime-input [label]="'Install Date'" [(value)]="asset.installDate"></datetime-input>
+                    </div>
+                    <div class="row form-group side-padding">
+                        <mat-form-field>
+                            <mat-label>Condition Assessment</mat-label>
+                            <mat-select [(ngModel)]="asset.condition">
+                                <mat-option *ngFor="let condition of inventoryService.conditions"
+                                    [value]="condition.id">
+                                    {{condition.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="row form-group side-padding">
@@ -46,6 +60,28 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
+                    </div>
+                    <div class="row form-group side-padding">
+                        <div class="col-8">
+                            <mat-form-field>
+                                <input matInput placeholder="Life Expectancy" type="number" [(ngModel)]="asset.number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <mat-label>Unit</mat-label>
+                                <mat-select [(ngModel)]="asset.lifeExpectancyScale">
+                                    <mat-option
+                                        *ngFor="let lifeExpectancyScale of inventoryService.lifeExpectancyScales"
+                                        [value]="lifeExpectancyScale.id">
+                                        {{lifeExpectancyScale.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row form-group side-padding">
+                        <datetime-input [label]="'Retired Date'" [(value)]="asset.retiredDate"></datetime-input>
                     </div>
                 </div>
             </div>
