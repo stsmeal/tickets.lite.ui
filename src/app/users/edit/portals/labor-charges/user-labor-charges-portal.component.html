@@ -1,0 +1,32 @@
+<portal>
+        <ng-container portal-title>
+            <mat-chip-list>
+                <mat-chip selected color="primary"><b style="color: white">{{(laborCharges)? laborCharges.length : 0}}</b>
+                </mat-chip>
+            </mat-chip-list>
+            <span style="margin-left: 5px;">Labor Charges</span>
+        </ng-container>
+        <ng-container portal-content>
+            <div class="container-grid">
+                <table mat-table [dataSource]="laborCharges" style="width: 100%">
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef>Type</th>
+                        <td mat-cell *matCellDef="let element"> {{ getLaborChargeType(element.type) }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef>Description</th>
+                            <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateStarted">
+                            <th mat-header-cell *matHeaderCellDef>Start Time</th>
+                            <td mat-cell *matCellDef="let element"> {{ formatDate(element.dateStarted) }} </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="['type', 'description', 'dateStarted']; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['type', 'description', 'dateStarted'];"></tr>
+                </table>
+            </div>
+        </ng-container>
+    </portal>

@@ -3,6 +3,8 @@ import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { GridColumn } from '../models/grid-column';
+import { LaborCharge } from '../models/labor-charge';
+import { Ticket } from '../models/ticket';
 
 @Injectable({
     providedIn: 'root'
@@ -118,5 +120,13 @@ export class UserService {
 
     public userQuickSearch(searchText: string): Observable<User[]> {
         return this.api.post('user/quicksearch', {searchText: searchText});
+    }
+
+    public getLaborCharges(userId: string): Observable<LaborCharge[]> {
+        return this.api.get('user/laborcharges/'+userId);
+    }
+
+    public getTickets(userId: string): Observable<Ticket[]> {
+        return this.api.get('user/tickets/'+userId);
     }
 }
