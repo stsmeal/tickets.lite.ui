@@ -20,7 +20,7 @@ import { DateInputComponent } from './shared/date-input.component';
 import { GridComponent } from './shared/grid/grid.component';
 import { ModalComponent } from './shared/modal.component';
 import { PortalComponent } from './shared/portal/portal.component';
-import { TicketNotesPortalComponent } from './tickets/edit/portals/ticket-notes/ticket-notes.component';
+import { NotesPortalComponent } from './shared/notes-portal/notes-portal.component';
 import { AssignmentsPortalComponent } from './tickets/edit/portals/assignments/assignments-portal.component';
 import { LaborChargePortalComponent } from './tickets/edit/portals/labor-charges/labor-charge-portal.component';
 import { AssetsMainComponent } from './inventory/main/assets-main.component';
@@ -59,7 +59,7 @@ const routes: Routes = [
     GridComponent,
     ModalComponent,
     PortalComponent,
-    TicketNotesPortalComponent,
+    NotesPortalComponent,
     AssignmentsPortalComponent,
     LaborChargePortalComponent,
     AssetsPortalComponent,
