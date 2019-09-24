@@ -97,4 +97,8 @@ export class InventoryService {
     public deleteAsset(id: string): Observable<Asset> {
         return this.api.delete('inventory/'+id);
     }
+
+    public assetQuickSearch(searchText: string) {
+        return this.api.post('inventory/quicksearch', {searchText: searchText});
+    }
 }

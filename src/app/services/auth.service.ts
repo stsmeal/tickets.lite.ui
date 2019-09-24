@@ -8,7 +8,7 @@ import { User } from '../models/user.js';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService{
+export class AuthService {
     public loading: boolean = false;
 
     private readonly TOKEN_KEY = 'cms_lite_token';
@@ -18,7 +18,7 @@ export class AuthService{
     private _token: string;
     private _user: User;
     private _rememberMe: boolean;
-    
+
     private localForage = localForage;
 
     get token(): string {
@@ -46,15 +46,16 @@ export class AuthService{
     }
 
     get isAuthenticated(): boolean {
-        if(this.token && this.token.length){
+        if (this.token && this.token.length) {
             return true;
         } else {
             return false;
         }
     }
 
-    constructor(private http: HttpClient) { 
+    constructor(private http: HttpClient) {
         this.loading = true;
+
         this.localForage.getItem<string>(this.TOKEN_KEY).then(
             (token: string) => {
                 this.token = token;
@@ -73,9 +74,9 @@ export class AuthService{
         ).catch(() => this.loading = false);
     }
 
-    public async isAuthenticatedAsync(){
+    public async isAuthenticatedAsync() {
         let token = await this.localForage.getItem<string>(this.TOKEN_KEY);
-        if(token && token.length){
+        if (token && token.length) {
             return true;
         } else {
             return false;
@@ -83,6 +84,15 @@ export class AuthService{
     }
 
     public authenticate(username: string, password: string): Observable<any> {
-        return this.http.post(config.apiEndpoint + '/user/authenticate', {username: username, password: password});
+        return this.http.post(config.apiEndpoint + '/user/authenticate', { username: username, password: password });
+    }
+
+    public getCurrentSite(): string {
+        let hosttree = window.location.host.split('.');
+        if (hosttree.length == 3 && hosttree[1].toLowerCase() == 'cmslite') {
+            return hosttree[0].toLowerCase();
+        } else {
+            return 'default';
+        }
     }
 }

@@ -27,6 +27,7 @@ import { AssetsMainComponent } from './inventory/main/assets-main.component';
 import { AssetEditComponent } from './inventory/edit/asset-edit.component';
 import { UsersMainComponent } from './users/main/users-main.component';
 import { UserEditComponent } from './users/edit/user-edit.component';
+import { AssetsPortalComponent } from './tickets/edit/portals/assets/assets-portal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -59,6 +60,7 @@ const routes: Routes = [
     TicketNotesPortalComponent,
     AssignmentsPortalComponent,
     LaborChargePortalComponent,
+    AssetsPortalComponent,
     AssetsMainComponent,
     AssetEditComponent,
     UsersMainComponent,

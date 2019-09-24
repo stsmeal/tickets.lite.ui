@@ -53,13 +53,7 @@
                     <div class="row form-group side-padding">
                         <mat-accordion>
                             <ticket-notes-portal [(notes)]="ticket.notes"></ticket-notes-portal>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Assets
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                            </mat-expansion-panel>
+                            <assets-portal [(assets)]="ticket.assets"></assets-portal>
                             <assignments-portal [(assignments)]="ticket.assignments"></assignments-portal>
                             <labor-charge-portal [(laborCharges)]="ticket.laborCharges"></labor-charge-portal>
                         </mat-accordion>

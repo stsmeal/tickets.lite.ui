@@ -16,7 +16,8 @@ export class ApiService {
         return this.http.get<T>(`${config.apiEndpoint}/${url}`, {
             headers: {
                 authorization: `Bearer ${this.auth.token}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                site: this.auth.getCurrentSite()
             }
         });
     }
@@ -25,7 +26,8 @@ export class ApiService {
         return this.http.post<T>(`${config.apiEndpoint}/${url}`, body, {
             headers: {
                 authorization: `Bearer ${this.auth.token}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                site: this.auth.getCurrentSite()
             }
         });
     }
@@ -34,7 +36,8 @@ export class ApiService {
         return this.http.put<T>(`${config.apiEndpoint}/${url}`, body, {
             headers: {
                 authorization: `Bearer ${this.auth.token}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                site: this.auth.getCurrentSite()
             }
         });
     }
@@ -43,7 +46,8 @@ export class ApiService {
         return this.http.delete<T>(`${config.apiEndpoint}/${url}`, {
             headers: {
                 authorization: `Bearer ${this.auth.token}`,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                site: this.auth.getCurrentSite()
             }
         });
     }
