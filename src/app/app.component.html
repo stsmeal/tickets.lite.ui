@@ -1,31 +1,33 @@
-<ng-container *ngIf="!auth.loading">
-    <mat-toolbar *ngIf="!auth.isAuthenticated" color='primary'>
-      <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
-      <span style="flex: 1 1 auto"></span>
-      <button mat-flat-button color='primary' style="margin-right: 10px;" [routerLink]="['/sign-in']">Sign in</button>
-      <a href="/"><button mat-raised-button color='accent'>Create Account</button></a>
-    </mat-toolbar>
-    <mat-toolbar *ngIf="auth.isAuthenticated" color='primary'>
-      <button *ngIf="isSmallScreen" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
-      <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="$event.preventDefault()"
-          [routerLink]="['/tickets']"><a href="/tickets"><mat-icon>work</mat-icon>Tickets</a></button>
-          <button mat-menu-item (click)="$event.preventDefault()"
-          [routerLink]="['/inventory']"><a href="/inventory"><mat-icon>build</mat-icon>Inventory</a></button>
-          <button mat-menu-item (click)="$event.preventDefault()"
-          [routerLink]="['/users']"><a href="/users"><mat-icon>supervisor_account</mat-icon>Users</a></button>
-      </mat-menu>
-      <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
-      <a href="/tickets" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
-        [routerLink]="['/tickets']">Tickets</button></a>
-      <a href="/inventory" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
-        [routerLink]="['/inventory']">Inventory</button></a>
-      <a href="/users" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
-        [routerLink]="['/users']">Users</button></a>
-      <span style="flex: 1 1 auto"></span>
-      <settings-menu></settings-menu>
-    </mat-toolbar>
-    <div>
+<div *ngIf="!auth.loading" class="box-container">
+  <div class="header">
+      <mat-toolbar *ngIf="!auth.isAuthenticated" color='primary'>
+        <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
+        <span style="flex: 1 1 auto"></span>
+        <button mat-flat-button color='primary' style="margin-right: 10px;" [routerLink]="['/sign-in']">Sign in</button>
+        <a href="/"><button mat-raised-button color='accent'>Create Account</button></a>
+      </mat-toolbar>
+      <mat-toolbar *ngIf="auth.isAuthenticated" color='primary'>
+        <button *ngIf="isSmallScreen" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="$event.preventDefault()"
+            [routerLink]="['/tickets']"><a href="/tickets"><mat-icon>work</mat-icon>Tickets</a></button>
+            <button mat-menu-item (click)="$event.preventDefault()"
+            [routerLink]="['/inventory']"><a href="/inventory"><mat-icon>build</mat-icon>Inventory</a></button>
+            <button mat-menu-item (click)="$event.preventDefault()"
+            [routerLink]="['/users']"><a href="/users"><mat-icon>supervisor_account</mat-icon>Users</a></button>
+        </mat-menu>
+        <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
+        <a href="/tickets" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+          [routerLink]="['/tickets']">Tickets</button></a>
+        <a href="/inventory" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+          [routerLink]="['/inventory']">Inventory</button></a>
+        <a href="/users" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
+          [routerLink]="['/users']">Users</button></a>
+        <span style="flex: 1 1 auto"></span>
+        <settings-menu></settings-menu>
+      </mat-toolbar>
+  </div>
+  <div class="content">
       <router-outlet></router-outlet>
-    </div>
-</ng-container>
+  </div>
+</div>

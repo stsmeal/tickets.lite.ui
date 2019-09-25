@@ -122,7 +122,26 @@ table {
     padding-right: 15px;
   }
 
-.container-page {
+.box-container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box-container .header {
+  flex: 0 1 auto;
+}
+
+.box-container .content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.box-container .footer {
+  flex: 0 1 50px;
+}
+
+.container-fluid {
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
@@ -144,19 +163,19 @@ table {
 }
 
 @media (min-width: 768px) {
-  .container-page {
+  .container-fluid {
     padding: 0px;
   }
 }
 
 @media (min-width: 992px) {
-  .container-page {
+  .container-fluid {
     padding: 30px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container-page {
+  .container-fluid {
     padding: 45px;
   }
 }
