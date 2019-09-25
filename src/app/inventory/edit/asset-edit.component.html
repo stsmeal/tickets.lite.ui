@@ -2,8 +2,7 @@
 <mat-toolbar color='accent'>
     <h1 color='primary'>Inventory</h1>
     <span style="flex: 1 1 auto"></span>
-    <a href="/inventory/new"><button mat-icon-button matTooltip="Create Asset" (click)="$event.preventDefault()"
-            [routerLink]="['/inventory/new']">
+    <a href="/inventory/new"><button mat-icon-button matTooltip="Create Asset" (click)="$event.preventDefault(); openNew();">
             <mat-icon>add</mat-icon>
         </button></a>
     <button *ngIf="isEdit" mat-icon-button matTooltip="Delete Asset" (click)="delete()" color="warn">
@@ -90,7 +89,7 @@
                     <div class="row form-group side-padding">
                         <button mat-flat-button color='primary' style="margin-right: 15px"
                             (click)="save()">Save</button>
-                        <button mat-flat-button color='accent' [routerLink]="['/inventory']">Close</button>
+                        <button mat-flat-button color='accent' (click)="close()">Close</button>
                     </div>
                 </div>
             </div>
