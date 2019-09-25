@@ -1,0 +1,11 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item style="line-height: 25px; height: 25px; margin-bottom: 5px;" (click)="openUser()">
+        <a [href]="'/users/'+auth.user._id" (click)="$event.preventDefault()">Signed in as {{auth.user.username}}</a>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="openSettings()">Settings</button>
+    <button mat-menu-item (click)="logout()">Sign out</button>
+</mat-menu>
