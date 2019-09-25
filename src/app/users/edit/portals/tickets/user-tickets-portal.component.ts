@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter } from "@angular/core";
+import { Component, Input, EventEmitter, Output } from "@angular/core";
 import { UserService } from 'src/app/users/user.service';
 import { User } from 'src/app/models/user';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -28,6 +28,8 @@ export class UserTicketsPortalComponent {
         }
     }
 
+    @Output() open: EventEmitter<Ticket> = new EventEmitter<Ticket>();
+
     public userChange: EventEmitter<User> = new EventEmitter<User>();
     public tickets: Ticket[];
 
@@ -37,7 +39,12 @@ export class UserTicketsPortalComponent {
     constructor(
         private userService: UserService,
         private notification: NotificationService) {}
+
     public formatDate(date?: Date): string {
         return (date) ? (new Date(date)).toLocaleString() : '';
+    }
+
+    public edit(ticket?: Ticket): void{
+        this.open.emit(ticket);
     }
 }
