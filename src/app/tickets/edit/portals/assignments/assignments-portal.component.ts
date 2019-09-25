@@ -20,6 +20,8 @@ export class AssignmentsPortalComponent {
 
     @Output() assignmentsChange: EventEmitter<User[]> = new EventEmitter<User[]>();
 
+    @Output() open: EventEmitter<User> = new EventEmitter<User>();
+
     public searchText: string;
     public searchAssignments: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
@@ -65,6 +67,8 @@ export class AssignmentsPortalComponent {
     }
 
     public edit(user?: User): void {
-
+        if(user){
+            this.open.emit(user);
+        }
     }
 }

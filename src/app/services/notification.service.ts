@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { ModalService } from './modal.service';
+import { Observable } from 'rxjs';
+import { ConfirmModalComponent } from '../shared/confirm-modal/confirm-modal.component';
 
 
 export class SnackBarMessage {
@@ -17,7 +20,9 @@ export class NotificationService {
   private isActive: boolean = false;
   private snackBarRef: MatSnackBarRef<SimpleSnackBar>;
 
-  constructor(public snackBar: MatSnackBar) { }
+  constructor(
+    public snackBar: MatSnackBar,
+    private modalService: ModalService) { }
 
   public add(message: string, action?: string, config?: MatSnackBarConfig): void {
     if (!config) {
@@ -85,5 +90,11 @@ export class NotificationService {
     } else {
       this.add(message, 'Dismiss', config);
     }
+  }
+
+  public confirm(message: string, title?: string): Observable<any> {
+    let modal = this.modalService.open(ConfirmModalComponent, { data: { message: message, title: title }});
+
+    return modal.afterClosed();
   }
 }

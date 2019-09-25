@@ -30,6 +30,7 @@ import { UserEditComponent } from './users/edit/user-edit.component';
 import { AssetsPortalComponent } from './tickets/edit/portals/assets/assets-portal.component';
 import { UserLaborChargesPortalComponent } from './users/edit/portals/labor-charges/user-labor-charges-portal.component';
 import { UserTicketsPortalComponent } from './users/edit/portals/tickets/user-tickets-portal.component';
+import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -68,7 +69,8 @@ const routes: Routes = [
     UsersMainComponent,
     UserEditComponent,
     UserLaborChargesPortalComponent,
-    UserTicketsPortalComponent
+    UserTicketsPortalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,6 @@ const routes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StartComponent]
+  entryComponents: [StartComponent, ConfirmModalComponent]
 })
 export class AppModule { }

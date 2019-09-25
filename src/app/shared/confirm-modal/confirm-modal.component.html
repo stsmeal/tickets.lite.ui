@@ -1,0 +1,21 @@
+<modal>
+    <ng-container modal-title>
+        <h1 mat-dialog-title>{{title}}</h1>
+    </ng-container>
+    <ng-container modal-content>
+        <div style='text-align: center'>
+            {{message}}
+        </div>
+        <br>
+    </ng-container>
+    <ng-container modal-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row form-group">
+                    <button mat-flat-button color='primary' style="margin-right: 10px" (click)="confirm()">Yes</button>
+                    <button mat-flat-button color='accent' (click)="close()">No</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</modal>
