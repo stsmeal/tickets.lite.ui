@@ -19,6 +19,7 @@ export class AssetsPortalComponent {
     }
 
     @Output() assetsChange: EventEmitter<Asset[]> = new EventEmitter<Asset[]>();
+    @Output() open: EventEmitter<Asset> = new EventEmitter<Asset>();
 
     public searchText: string;
     public searchAssets: BehaviorSubject<Asset[]> = new BehaviorSubject<Asset[]>([]);
@@ -64,7 +65,9 @@ export class AssetsPortalComponent {
         }
     }
 
-    public edit(user?: Asset): void {
-
+    public edit(asset?: Asset): void {
+        if(asset){
+            this.open.emit(asset);
+        }
     }
 }
