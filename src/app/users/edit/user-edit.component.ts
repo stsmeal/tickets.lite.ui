@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user';
 import { UserService } from '../user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { cloneDeep } from 'lodash';
+import { Ticket } from 'src/app/models/ticket';
 
 @Component({
     templateUrl: 'user-edit.component.html'
@@ -13,8 +15,9 @@ export class UserEditComponent implements OnInit {
     public loading: boolean = false;
     public user: User = new User();
 
-    public passwordConfirm: string;
+    private oUser: User = new User();
 
+    public passwordConfirm: string;
 
     constructor(
         public userService: UserService,
@@ -33,6 +36,7 @@ export class UserEditComponent implements OnInit {
                     this.userService.getUser(params.get('id')).subscribe(
                         (user: User) => {
                             this.user = user;
+                            this.oUser = cloneDeep(user);
                             this.loading = false;
                         },
                         (error) => {
@@ -42,6 +46,7 @@ export class UserEditComponent implements OnInit {
                     )
                 } else {
                     this.user = new User();
+                    this.oUser = new User();
                 }
             }
         );
@@ -67,6 +72,7 @@ export class UserEditComponent implements OnInit {
                                     this.router.navigateByUrl('users/' + user._id);
                                 } else {
                                     this.user = user;
+                                    this.oUser = cloneDeep(user);
                                     this.loading = false;
                                 }
                             });
@@ -88,6 +94,7 @@ export class UserEditComponent implements OnInit {
                                 this.router.navigateByUrl('users/' + user._id);
                             } else {
                                 this.user = user;
+                                this.oUser = cloneDeep(user);
                                 this.loading = false;
                             }
                         });
@@ -101,24 +108,79 @@ export class UserEditComponent implements OnInit {
         }
     }
 
+    public openNew(): void {
+        if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
+            this.router.navigateByUrl('users/new');
+        } else {
+            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                (response: boolean) => {
+                    if(response){
+                        this.router.navigateByUrl('users/new');
+                    }
+                }
+            );
+        }
+    }
+
 
     public delete(): void {
-        this.loading = true;
-        this.userService.deleteUser(this.user._id).subscribe(
-            (user: User) => {
-                if(user){
-                    this.router.navigateByUrl('users');
-                } else {
-                    this.user = user;
-                    this.notification.error('Error while deleting user');
+        if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
+            this.router.navigateByUrl('users');
+        } else {
+            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                (response: boolean) => {
+                    if(response){
+                        this.loading = true;
+                        this.userService.deleteUser(this.user._id).subscribe(
+                            (user: User) => {
+                                if(user){
+                                    this.router.navigateByUrl('users');
+                                } else {
+                                    this.user = user;
+                                    this.notification.error('Error while deleting user');
+                                }
+                                this.loading = false;
+                            }, 
+                            (error) => {
+                                console.log(error);
+                                this.loading = false;
+                                this.notification.error('Error while deleting user');
+                            }
+                        );
+                    }
                 }
-                this.loading = false;
-            }, 
-            (error) => {
-                console.log(error);
-                this.loading = false;
-                this.notification.error('Error while deleting user');
+            );
+        }
+    }
+    
+    public close(): void {
+        if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
+            this.router.navigateByUrl('users');
+        } else {
+            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                (response: boolean) => {
+                    if(response){
+                        this.router.navigateByUrl('users');
+                    }
+                }
+            );
+        }
+    }
+
+
+    public openTicket(ticket: Ticket): void {
+        if(ticket && ticket._id){
+            if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
+                this.router.navigateByUrl('tickets/'+ticket._id);
+            } else {
+                this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                    (response: boolean) => {
+                        if(response){
+                            this.router.navigateByUrl('tickets/'+ticket._id);
+                        }
+                    }
+                );
             }
-        );
+        }
     }
 }

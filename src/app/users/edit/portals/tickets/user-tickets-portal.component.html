@@ -26,7 +26,7 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="['number', 'description', 'dateCreated']; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: ['number', 'description', 'dateCreated'];"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['number', 'description', 'dateCreated'];" (click)="edit(row)"></tr>
             </table>
         </div>
     </ng-container>
