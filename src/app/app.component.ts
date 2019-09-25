@@ -27,9 +27,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  public signOut(): void {
-    this.auth.token = null;
-    this.router.navigate(['/sign-in']);
-  }
 }

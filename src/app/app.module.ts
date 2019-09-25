@@ -31,6 +31,7 @@ import { AssetsPortalComponent } from './tickets/edit/portals/assets/assets-port
 import { UserLaborChargesPortalComponent } from './users/edit/portals/labor-charges/user-labor-charges-portal.component';
 import { UserTicketsPortalComponent } from './users/edit/portals/tickets/user-tickets-portal.component';
 import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
+import { SettingsMenuComponent } from './shared/settings-menu/settings-menu.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -70,7 +71,8 @@ const routes: Routes = [
     UserEditComponent,
     UserLaborChargesPortalComponent,
     UserTicketsPortalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    SettingsMenuComponent
   ],
   imports: [
     BrowserModule,
