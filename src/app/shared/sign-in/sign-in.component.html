@@ -1,5 +1,5 @@
 <div class="container padded">
-    <mat-card>
+    <mat-card *ngIf="!findWorkplace">
         <mat-card-header>
             <h1 mat-card-title>Sign in</h1>
         </mat-card-header>
@@ -34,7 +34,37 @@
                 <div class="row form-group">
                     <div class="col-12">
                         <button mat-raised-button color="primary" style="width: 100%" (click)="signIn()"
-                        [disabled]="!username.value || !password.value || authenticating">{{signInText}}</button>
+                            [disabled]="!username.value || !password.value || authenticating">{{signInText}}</button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="findWorkplace" style="text-align: center">
+        <mat-card-header>
+            <h1>Sign into your Workplace</h1>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="container padded">
+                <div class="row form-group">
+                    <div class="col-12">
+                        Enter your workplace's <b>Cms Lite URL.</b>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-9">
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="workplace" style="text-align: right; font-weight: bold">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3" style="text-align: left">
+                        <h3><b>.{{url}}</b></h3>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <button type="submit" mat-raised-button color="primary" style="width: 100%"
+                            (click)="goToWorkplace()">Continue</button>
                     </div>
                 </div>
             </div>
