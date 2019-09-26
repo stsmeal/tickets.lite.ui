@@ -84,7 +84,12 @@ export class AuthService {
     }
 
     public authenticate(username: string, password: string): Observable<any> {
-        return this.http.post(config.apiEndpoint + '/user/authenticate', { username: username, password: password });
+        return this.http.post(config.apiEndpoint + '/auth/token', 
+        { username: username, password: password },{
+        headers: {
+            'Content-Type': 'application/json',
+            site: this.getCurrentSite()
+        }});
     }
 
     public getCurrentSite(): string {
@@ -92,7 +97,7 @@ export class AuthService {
         if (hosttree.length == 3 && hosttree[1].toLowerCase() == 'cmslite') {
             return hosttree[0].toLowerCase();
         } else {
-            return 'default';
+            return 'cmslite';
         }
     }
 }

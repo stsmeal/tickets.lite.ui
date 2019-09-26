@@ -1,22 +1,29 @@
-<mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
-<mat-toolbar color='accent'>
-    <h1 color='primary'>Inventory</h1>
-    <span style="flex: 1 1 auto"></span>
-    <a href="/inventory/new"><button mat-icon-button matTooltip="Create Asset" (click)="$event.preventDefault()"
-            [routerLink]="['/inventory/new']">
-            <mat-icon>add</mat-icon>
-        </button></a>
-</mat-toolbar>
-<div *ngIf="!loading" class="container-fluid">
-    <mat-card>
-        <mat-card-content>
-            <div class="row side-padding">
-                <mat-form-field>
-                    <input matInput placeholder="Filter" [(ngModel)]="filter">
-                    <mat-icon matPrefix>filter_list</mat-icon>
-                </mat-form-field>
-            </div>
-            <grid *ngIf="!loading" [data]="assets" [filter]="filter" [(columns)]="columns" (selection)="selection($event)"></grid>
-        </mat-card-content>
-    </mat-card>
+<div class="box-container">
+    <div class="header">
+        <mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
+        <mat-toolbar color='accent'>
+            <h1 color='primary'>Inventory</h1>
+            <span style="flex: 1 1 auto"></span>
+            <a href="/inventory/new"><button mat-icon-button matTooltip="Create Asset" (click)="$event.preventDefault()"
+                    [routerLink]="['/inventory/new']">
+                    <mat-icon>add</mat-icon>
+                </button></a>
+        </mat-toolbar>
+    </div>
+    <div class="content">
+        <div *ngIf="!loading" class="container-fluid">
+            <mat-card>
+                <mat-card-content>
+                    <div class="row side-padding">
+                        <mat-form-field>
+                            <input matInput placeholder="Filter" [(ngModel)]="filter">
+                            <mat-icon matPrefix>filter_list</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <grid *ngIf="!loading" [data]="assets" [filter]="filter" [(columns)]="columns"
+                        (selection)="selection($event)"></grid>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
 </div>
