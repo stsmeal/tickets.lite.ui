@@ -94,7 +94,7 @@ export class AuthService {
 
     public getCurrentSite(): string {
         let hosttree = window.location.host.split('.');
-        if (hosttree.length == 3 && hosttree[1].toLowerCase() == 'cmslite') {
+        if (hosttree.length == 3 && hosttree[1].toLowerCase() == config.domainName) {
             return hosttree[0].toLowerCase();
         } else {
             return 'cmslite';
