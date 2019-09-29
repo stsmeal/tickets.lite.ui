@@ -4,7 +4,7 @@
         <a href="/"><button  mat-flat-button color='primary' style="margin-right: 10px;"><h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1></button></a>
         <span style="flex: 1 1 auto"></span>
         <button mat-flat-button color='primary' style="margin-right: 10px;" [routerLink]="['/sign-in']">Sign in</button>
-        <a href="/"><button mat-raised-button color='accent'>Create Account</button></a>
+        <a href="/"><button mat-raised-button color='accent' [routerLink]="['/create-workplace']">Create Workplace</button></a>
       </mat-toolbar>
       <mat-toolbar *ngIf="auth.isAuthenticated" color='primary'>
         <button *ngIf="isSmallScreen" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>

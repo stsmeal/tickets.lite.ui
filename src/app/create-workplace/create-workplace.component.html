@@ -1,0 +1,109 @@
+<div class="container padded">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="row">
+                <div class="col-12" style="text-align: center">
+                    <h1>Create Workplace</h1>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-12">
+                    <mat-card>
+                        <mat-card-content>
+                            <div class="container padded">
+                                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Site" formControlName="site" required>
+                                                    <mat-error *ngIf="form.controls['site'].invalid">{{getErrorMessage(form.controls['site'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Company" formControlName="company"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['company'].invalid">{{getErrorMessage(form.controls['company'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Username" formControlName="username"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['username'].invalid">{{getErrorMessage(form.controls['username'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Email" formControlName="email"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['email'].invalid">{{getErrorMessage(form.controls['email'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="First Name" formControlName="firstname"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['firstname'].invalid">{{getErrorMessage(form.controls['firstname'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Last Name" formControlName="lastname"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['lastname'].invalid">{{getErrorMessage(form.controls['lastname'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input type="password" matInput placeholder="Password" formControlName="password"
+                                                        required>
+                                                        <mat-error *ngIf="form.controls['password'].invalid">{{getErrorMessage(form.controls['password'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row form-group side-padding">
+                                                <mat-form-field>
+                                                    <input type="password" matInput placeholder="Confirm Password"
+                                                        formControlName="passwordConfirm" required>
+                                                        <mat-error *ngIf="form.controls['passwordConfirm'].invalid">{{getErrorMessage(form.controls['passwordConfirm'])}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <mat-error *ngIf="form.errors && form.errors.mismatch">Passwords do not match</mat-error>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <button mat-flat-button color='primary' type="submit"
+                                                [disabled]="!form.valid" style="width: 100%">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
