@@ -32,6 +32,7 @@ import { UserLaborChargesPortalComponent } from './users/edit/portals/labor-char
 import { UserTicketsPortalComponent } from './users/edit/portals/tickets/user-tickets-portal.component';
 import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 import { SettingsMenuComponent } from './shared/settings-menu/settings-menu.component';
+import { CreateWorkplaceComponent } from './create-workplace/create-workplace.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
   { path: 'users', component: UsersMainComponent, canActivate: [AuthGuard] },
   { path: 'users/new', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'users/:id', component: UserEditComponent, canActivate: [AuthGuard] },
-  { path: 'sign-in', component: LogInComponent }
+  { path: 'sign-in', component: LogInComponent },
+  { path: 'create-workplace', component: CreateWorkplaceComponent }
 ];
 
 @NgModule({
@@ -72,7 +74,8 @@ const routes: Routes = [
     UserLaborChargesPortalComponent,
     UserTicketsPortalComponent,
     ConfirmModalComponent,
-    SettingsMenuComponent
+    SettingsMenuComponent,
+    CreateWorkplaceComponent
   ],
   imports: [
     BrowserModule,
