@@ -11,6 +11,9 @@ export class AssetsMainComponent implements OnInit {
     public loading: boolean = false;
     public filter: string = '';
     public assets: Asset[];
+    public routeLink = (asset: Asset): string => {
+        return "/inventory/"+asset._id;
+    }
 
     public columns: GridColumn[];
 

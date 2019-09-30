@@ -11,6 +11,9 @@ export class TicketsMainComponent implements OnInit {
     public loading: boolean = false;
     public filter: string = '';
     public tickets: Ticket[];
+    public routeLink = (ticket: Ticket): string => {
+        return "/tickets/"+ticket._id;
+    }
 
     public columns: GridColumn[];
 

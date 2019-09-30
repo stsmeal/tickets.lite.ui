@@ -11,6 +11,7 @@ export class GridComponent implements OnInit, OnChanges {
     @Input() data: any;
     @Input() columns: GridColumn[];
     @Input() filter: string = '';
+    @Input() routeLinkFn: (item: any) => string;
 
     @Output() columnsChange: EventEmitter<GridColumn[]> = new EventEmitter<GridColumn[]>();
     @Output() selection: EventEmitter<any> = new EventEmitter<any[]>();

@@ -55,7 +55,7 @@ export class CreateWorkplaceComponent {
                         email: v.email,
                         password: v.password,
                         role: 'accountOwner'
-                    }
+                    };
 
                     this.http.post(config.apiEndpoint + '/auth/create', {configuration: configuration, user: user}).subscribe(
                         (res) => {

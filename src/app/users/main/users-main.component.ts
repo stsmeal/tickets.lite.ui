@@ -11,6 +11,9 @@ export class UsersMainComponent implements OnInit {
     public loading: boolean = false;
     public filter: string = '';
     public users: User[];
+    public routeLink = (user: User): string => {
+        return '/users/'+user._id;
+    }
 
     public columns: GridColumn[];
 

@@ -20,7 +20,7 @@
                             <mat-icon matPrefix>filter_list</mat-icon>
                         </mat-form-field>
                     </div>
-                    <grid *ngIf="!loading" [data]="assets" [filter]="filter" [(columns)]="columns"
+                    <grid *ngIf="!loading" [data]="assets" [filter]="filter" [routeLinkFn]="routeLink" [(columns)]="columns"
                         (selection)="selection($event)"></grid>
                 </mat-card-content>
             </mat-card>
