@@ -13,9 +13,9 @@ import * as config from '../../config.json';
 export class SignInComponent implements OnInit {
     public form = new FormGroup({
         username: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required])
+        password: new FormControl('', [Validators.required]),
+        rememberMe: new FormControl(false)
     })
-    public rememberMe: boolean = true;
 
     public authenticating: boolean = false;
     public signInText: string = "Sign In";
@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
                 const {token, user} = response;
                 this.auth.token = token;
                 this.auth.user = <User>user;
-                this.auth.rememberMe = this.rememberMe;
+                this.auth.rememberMe = this.form.value.rememberMe;
                 this.authenticating = false;
                 this.router.navigate(['/tickets']);
             }, (error) => {
