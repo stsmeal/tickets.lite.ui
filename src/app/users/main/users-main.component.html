@@ -15,7 +15,7 @@
             <mat-card>
                 <mat-card-content>
                     <grid [data]="users" [queryFn]="query" [routeLinkFn]="routeLink"
-                        [(columns)]="columns"
+                        [(columns)]="columns" [(loading)]="loading"
                         (selection)="selection($event)"></grid>
                 </mat-card-content>
             </mat-card>

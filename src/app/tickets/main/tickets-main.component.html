@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <mat-card>
                 <mat-card-content>
-                    <grid [routeLinkFn]="routeLink" [queryFn]="query" [(columns)]="columns"
+                    <grid [routeLinkFn]="routeLink" [queryFn]="query" [(columns)]="columns" [(loading)]="loading"
                         (selection)="selection($event)"></grid>
                 </mat-card-content>
             </mat-card>

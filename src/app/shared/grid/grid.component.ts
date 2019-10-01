@@ -17,14 +17,24 @@ export class GridComponent implements OnInit, OnChanges, AfterViewInit {
     @Input() filter: string = '';
     @Input() routeLinkFn: (item: any) => string;
     @Input() queryFn: (qc: QueryCriteria) => any;
+    @Input() 
+    get loading(): boolean {
+        return this._loading;
+    }
+    set loading(val: boolean) {
+        this._loading = val;
+        this.loadingChange.emit(val);
+    }
+
 
     @Output() columnsChange: EventEmitter<GridColumn[]> = new EventEmitter<GridColumn[]>();
     @Output() selection: EventEmitter<any> = new EventEmitter<any[]>();
+    @Output() loadingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @ViewChild(MatSort, {static: true}) sort: MatSort;
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-    public loading: boolean = false;
+    public _loading: boolean = false;
     public total: number;
 
     get displayedColumns(): string[] {
