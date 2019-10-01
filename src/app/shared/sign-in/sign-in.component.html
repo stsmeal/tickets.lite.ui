@@ -6,13 +6,14 @@
         <mat-divider></mat-divider>
         <mat-card-content>
             <div class="container padded">
+                    <form [formGroup]="form" (ngSubmit)="signIn()">
                 <div class="row form-group">
                     <div class="col-12">
                         <mat-form-field>
                             <mat-label>Username</mat-label>
-                            <input matInput placeholder="Username" [formControl]="username" required>
+                            <input matInput placeholder="Username" formControlName="username" required>
                             <mat-icon matPrefix>person</mat-icon>
-                            <mat-error *ngIf="username.invalid">Enter Username</mat-error>
+                            <mat-error *ngIf="form.controls.username.invalid">Enter Username</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -20,9 +21,9 @@
                     <div class="col-12">
                         <mat-form-field>
                             <mat-label>Password</mat-label>
-                            <input matInput type="password" [formControl]="password" required>
+                            <input matInput type="password" formControlName="password" required>
                             <mat-icon matPrefix>lock</mat-icon>
-                            <mat-error *ngIf="password.invalid">Enter Password</mat-error>
+                            <mat-error *ngIf="form.controls.password.invalid">Enter Password</mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -33,19 +34,22 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-12">
-                        <button mat-raised-button color="primary" style="width: 100%" (click)="signIn()"
-                            [disabled]="!username.value || !password.value || authenticating">{{signInText}}</button>
+                        <button mat-raised-button color="primary" style="width: 100%" type="submit"
+                        [disabled]="!form.valid">{{signInText}}</button>
                     </div>
                 </div>
+            </form>
             </div>
         </mat-card-content>
     </mat-card>
     <mat-card *ngIf="findWorkplace" style="text-align: center">
-        <mat-card-header>
-            <h1>Sign into your Workplace</h1>
-        </mat-card-header>
         <mat-card-content>
             <div class="container padded">
+                    <div class="row form-group">
+                        <div class="col-12">
+                            <h1>Sign into your Workplace</h1>
+                        </div>
+                    </div>
                 <div class="row form-group">
                     <div class="col-12">
                         Enter your workplace's <b>Cms Lite URL.</b>
@@ -70,4 +74,9 @@
             </div>
         </mat-card-content>
     </mat-card>
+    <div *ngIf="findWorkplace" class="row form-group" style="text-align: center; margin-top: 10px">
+        <div class="col-12">
+            Do not have a workplace? <a href="/create-workplace" style="text-decoration: underline;">Create one here.</a>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
@@ -11,8 +11,10 @@ import * as config from '../../config.json';
     templateUrl: 'sign-in.component.html'
 })
 export class SignInComponent implements OnInit {
-    public username = new FormControl('', [Validators.required]);
-    public password = new FormControl('', [Validators.required]);
+    public form = new FormGroup({
+        username: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required])
+    })
     public rememberMe: boolean = true;
 
     public authenticating: boolean = false;
@@ -41,7 +43,7 @@ export class SignInComponent implements OnInit {
     public signIn(): void {
         this.authenticating = true;
         this.signInText = "Signing In...";
-        this.auth.authenticate(this.username.value, this.password.value).subscribe(
+        this.auth.authenticate(this.form.value.username, this.form.value.password).subscribe(
             (response: any) => {
                 const {token, user} = response;
                 this.auth.token = token;
