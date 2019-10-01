@@ -9,10 +9,13 @@ import { InventoryService } from '../inventory.service';
 })
 export class AssetsMainComponent implements OnInit {
     public loading: boolean = false;
-    public filter: string = '';
     public assets: Asset[];
     public routeLink = (asset: Asset): string => {
         return "/inventory/"+asset._id;
+    }
+
+    public query = (queryCriteria) => {
+        return this.inventoryService.query(queryCriteria);
     }
 
     public columns: GridColumn[];
@@ -23,18 +26,7 @@ export class AssetsMainComponent implements OnInit {
         private router: Router) { }
 
     public ngOnInit(): void {
-        this.loading = true;
         this.columns = this.inventoryService.getColumns();
-        this.inventoryService.getInventory().subscribe(
-            (assets) => {
-                this.assets = assets;
-                this.loading = false;
-            },
-            (error) => {
-                console.log(error);
-                this.loading = false;
-            }
-        );
     }
 
     public selection(asset: Asset): void {

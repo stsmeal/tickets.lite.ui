@@ -9,10 +9,13 @@ import { UserService } from '../user.service';
 })
 export class UsersMainComponent implements OnInit {
     public loading: boolean = false;
-    public filter: string = '';
     public users: User[];
     public routeLink = (user: User): string => {
         return '/users/'+user._id;
+    }
+
+    public query = (queryCriteria) => {
+        return this.userService.query(queryCriteria);
     }
 
     public columns: GridColumn[];
@@ -23,18 +26,7 @@ export class UsersMainComponent implements OnInit {
         private router: Router) { }
 
     public ngOnInit(): void {
-        this.loading = true;
         this.columns = this.userService.getColumns();
-        this.userService.getUsers().subscribe(
-            (users) => {
-                this.users = users;
-                this.loading = false;
-            },
-            (error) => {
-                console.log(error);
-                this.loading = false;
-            }
-        );
     }
 
     public selection(user: User): void {

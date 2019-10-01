@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
 })
 export class TicketsMainComponent implements OnInit {
     public loading: boolean = false;
-    public filter: string = '';
-    public tickets: Ticket[];
+    public tickets: Ticket[] = [];
     public routeLink = (ticket: Ticket): string => {
         return "/tickets/"+ticket._id;
+    }
+
+    public query = (queryCriteria) => {
+        return this.ticketService.query(queryCriteria);
     }
 
     public columns: GridColumn[];
@@ -23,18 +26,7 @@ export class TicketsMainComponent implements OnInit {
         private router: Router) { }
 
     public ngOnInit(): void {
-        this.loading = true;
         this.columns = this.ticketService.getColumns();
-        this.ticketService.getTickets().subscribe(
-            (tickets) => {
-                this.tickets = tickets;
-                this.loading = false;
-            },
-            (error) => {
-                console.log(error);
-                this.loading = false;
-            }
-        );
     }
 
     public selection(ticket: Ticket): void {

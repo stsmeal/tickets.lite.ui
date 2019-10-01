@@ -11,16 +11,10 @@
         </mat-toolbar>
     </div>
     <div class="content">
-        <div *ngIf="!loading" class="container-fluid">
+        <div class="container-fluid">
             <mat-card>
                 <mat-card-content>
-                    <div class="row side-padding">
-                        <mat-form-field>
-                            <input matInput placeholder="Filter" [(ngModel)]="filter">
-                            <mat-icon matPrefix>filter_list</mat-icon>
-                        </mat-form-field>
-                    </div>
-                    <grid *ngIf="!loading" [data]="tickets" [filter]="filter" [routeLinkFn]="routeLink" [(columns)]="columns"
+                    <grid [routeLinkFn]="routeLink" [queryFn]="query" [(columns)]="columns"
                         (selection)="selection($event)"></grid>
                 </mat-card-content>
             </mat-card>

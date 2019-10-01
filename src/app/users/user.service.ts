@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { GridColumn } from '../models/grid-column';
 import { LaborCharge } from '../models/labor-charge';
 import { Ticket } from '../models/ticket';
+import { QueryCriteria } from '../models/query';
 
 @Injectable({
     providedIn: 'root'
@@ -128,5 +129,9 @@ export class UserService {
 
     public getTickets(userId: string): Observable<Ticket[]> {
         return this.api.get('user/tickets/'+userId);
+    }
+
+    public query(queryCriteria: QueryCriteria): Observable<User[]>{
+        return this.api.post('user/query', queryCriteria);
     }
 }

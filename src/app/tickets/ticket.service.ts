@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket';
 import { GridColumn } from '../models/grid-column';
+import { SortDirection } from '@angular/material/sort';
+import { QueryCriteria } from '../models/query';
 
 @Injectable({
     providedIn: 'root'
@@ -110,5 +112,9 @@ export class TicketService {
 
     public deleteTicket(id: string): Observable<Ticket> {
         return this.api.delete('ticket/' + id);
+    }
+
+    public query(queryCriteria: QueryCriteria): Observable<Ticket[]>{
+        return this.api.post('ticket/query', queryCriteria);
     }
 }

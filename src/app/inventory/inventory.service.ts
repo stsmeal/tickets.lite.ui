@@ -3,6 +3,7 @@ import { GridColumn } from '../models/grid-column';
 import { Asset } from '../models/asset';
 import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs';
+import { QueryCriteria } from '../models/query';
 
 @Injectable({
     providedIn: 'root'
@@ -115,5 +116,9 @@ export class InventoryService {
 
     public assetQuickSearch(searchText: string) {
         return this.api.post('inventory/quicksearch', {searchText: searchText});
+    }
+
+    public query(queryCriteria: QueryCriteria): Observable<Asset[]>{
+        return this.api.post('inventory/query', queryCriteria);
     }
 }
