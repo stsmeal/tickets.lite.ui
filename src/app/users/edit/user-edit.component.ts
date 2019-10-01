@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../user.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 import { cloneDeep } from 'lodash';
 import { Ticket } from 'src/app/models/ticket';
 
@@ -24,7 +24,7 @@ export class UserEditComponent implements OnInit {
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
 
         
     public ngOnInit(): void {
@@ -57,15 +57,15 @@ export class UserEditComponent implements OnInit {
         this.user.dateCreated = new Date();
         if(!this.isEdit){
             if(!this.user.username){
-                this.notification.error('Enter a username');
+                this.alert.error('Enter a username');
             } else if(!this.user.password){
-                this.notification.error('Enter a password');
+                this.alert.error('Enter a password');
             } else if(this.user.password != this.passwordConfirm){
-                this.notification.error('Passwords do not match');
+                this.alert.error('Passwords do not match');
             } else {
                 this.userService.registerUser(this.user).subscribe(
                     (user: User) => {
-                        this.notification.success('User saved');
+                        this.alert.success('User saved');
                         this.route.paramMap.subscribe(
                             (params: ParamMap) =>{
                                 if(!params.has('id')){
@@ -80,14 +80,14 @@ export class UserEditComponent implements OnInit {
                     (error) => {
                         console.log(error);
                         this.loading = false;
-                        this.notification.error('Error while saving user');
+                        this.alert.error('Error while saving user');
                     }
                 );
             }
         } else {
             this.userService.saveUser(this.user).subscribe(
                 (user: User) => {
-                    this.notification.success('User saved');
+                    this.alert.success('User saved');
                     this.route.paramMap.subscribe(
                         (params: ParamMap) =>{
                             if(!params.has('id')){
@@ -102,7 +102,7 @@ export class UserEditComponent implements OnInit {
                 (error) => {
                     console.log(error);
                     this.loading = false;
-                    this.notification.error('Error while saving user');
+                    this.alert.error('Error while saving user');
                 }
             );
         }
@@ -112,7 +112,7 @@ export class UserEditComponent implements OnInit {
         if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
             this.router.navigateByUrl('users/new');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('users/new');
@@ -127,7 +127,7 @@ export class UserEditComponent implements OnInit {
         if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
             this.router.navigateByUrl('users');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.loading = true;
@@ -137,14 +137,14 @@ export class UserEditComponent implements OnInit {
                                     this.router.navigateByUrl('users');
                                 } else {
                                     this.user = user;
-                                    this.notification.error('Error while deleting user');
+                                    this.alert.error('Error while deleting user');
                                 }
                                 this.loading = false;
                             }, 
                             (error) => {
                                 console.log(error);
                                 this.loading = false;
-                                this.notification.error('Error while deleting user');
+                                this.alert.error('Error while deleting user');
                             }
                         );
                     }
@@ -157,7 +157,7 @@ export class UserEditComponent implements OnInit {
         if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
             this.router.navigateByUrl('users');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('users');
@@ -173,7 +173,7 @@ export class UserEditComponent implements OnInit {
             if(JSON.stringify(this.user) == JSON.stringify(this.oUser)){
                 this.router.navigateByUrl('tickets/'+ticket._id);
             } else {
-                this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                     (response: boolean) => {
                         if(response){
                             this.router.navigateByUrl('tickets/'+ticket._id);

@@ -15,7 +15,7 @@ export class SnackBarMessage {
 @Injectable({
   providedIn: "root"
 })
-export class NotificationService {
+export class AlertService {
   private messages: SnackBarMessage[] = [];
   private isActive: boolean = false;
   private snackBarRef: MatSnackBarRef<SimpleSnackBar>;

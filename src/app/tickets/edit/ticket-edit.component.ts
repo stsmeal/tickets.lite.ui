@@ -3,7 +3,7 @@ import { Ticket } from 'src/app/models/ticket';
 import { TicketService } from '../ticket.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 import { User } from 'src/app/models/user';
 import { cloneDeep } from 'lodash';
 import { Asset } from 'src/app/models/asset';
@@ -23,7 +23,7 @@ export class TicketEditComponent implements OnInit {
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
 
     public ngOnInit(): void {
         this.route.paramMap.subscribe(
@@ -56,7 +56,7 @@ export class TicketEditComponent implements OnInit {
         this.ticket.userCreated = this.auth.user;
         this.ticketService.saveTicket(this.ticket).subscribe(
             (ticket: Ticket) => {
-                this.notification.success('Ticket saved');
+                this.alert.success('Ticket saved');
                 this.route.paramMap.subscribe(
                     (params: ParamMap) =>{
                         if(!params.has('id')){
@@ -71,7 +71,7 @@ export class TicketEditComponent implements OnInit {
             (error) => {
                 console.log(error);
                 this.loading = false;
-                this.notification.error('Error while saving ticket');
+                this.alert.error('Error while saving ticket');
             }
         )
     }
@@ -80,7 +80,7 @@ export class TicketEditComponent implements OnInit {
         if(JSON.stringify(this.ticket) == JSON.stringify(this.oTicket)){
             this.router.navigateByUrl('tickets/new');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('tickets/new');
@@ -91,7 +91,7 @@ export class TicketEditComponent implements OnInit {
     }
 
     public delete(): void {
-        this.notification.confirm('Are you sure you want to delete this ticket?').subscribe(
+        this.alert.confirm('Are you sure you want to delete this ticket?').subscribe(
             (response: boolean) => {
                 if(response){
                     this.loading = true;
@@ -101,14 +101,14 @@ export class TicketEditComponent implements OnInit {
                                 this.router.navigateByUrl('tickets');
                             } else {
                                 this.ticket = ticket;
-                                this.notification.error('Error while deleting ticket');
+                                this.alert.error('Error while deleting ticket');
                             }
                             this.loading = false;
                         }, 
                         (error) => {
                             console.log(error);
                             this.loading = false;
-                            this.notification.error('Error while deleting ticket');
+                            this.alert.error('Error while deleting ticket');
                         }
                     );
                 }
@@ -120,7 +120,7 @@ export class TicketEditComponent implements OnInit {
         if(JSON.stringify(this.ticket) == JSON.stringify(this.oTicket)){
             this.router.navigateByUrl('tickets');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('tickets');
@@ -135,7 +135,7 @@ export class TicketEditComponent implements OnInit {
             if(JSON.stringify(this.ticket) == JSON.stringify(this.oTicket)){
                 this.router.navigateByUrl('users/'+user._id);
             } else {
-                this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+                this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                     (response: boolean) => {
                         if(response){
                             this.router.navigateByUrl('users/'+user._id);
@@ -151,7 +151,7 @@ export class TicketEditComponent implements OnInit {
             if(JSON.stringify(this.ticket) == JSON.stringify(this.oTicket)){
                 this.router.navigateByUrl('inventory/'+asset._id);
             } else {
-                this.notification.confirm('There are unsaved changes are you sure you want to leave?').subscribe(
+                this.alert.confirm('There are unsaved changes are you sure you want to leave?').subscribe(
                     (response: boolean) => {
                         if(response){
                             this.router.navigateByUrl('inventory/'+asset._id);

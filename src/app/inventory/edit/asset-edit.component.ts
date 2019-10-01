@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Asset } from 'src/app/models/asset';
 import { InventoryService } from '../inventory.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 import { cloneDeep } from 'lodash';
 
 @Component({
@@ -22,7 +22,7 @@ export class AssetEditComponent implements OnInit {
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
 
         
     public ngOnInit(): void {
@@ -56,7 +56,7 @@ export class AssetEditComponent implements OnInit {
         this.asset.userCreated = this.auth.user;
         this.inventoryService.saveAsset(this.asset).subscribe(
             (asset: Asset) => {
-                this.notification.success('Asset saved');
+                this.alert.success('Asset saved');
                 this.route.paramMap.subscribe(
                     (params: ParamMap) =>{
                         if(!params.has('id')){
@@ -71,7 +71,7 @@ export class AssetEditComponent implements OnInit {
             (error) => {
                 console.log(error);
                 this.loading = false;
-                this.notification.error('Error while saving asset');
+                this.alert.error('Error while saving asset');
             }
         );
     }
@@ -80,7 +80,7 @@ export class AssetEditComponent implements OnInit {
         if(JSON.stringify(this.asset) == JSON.stringify(this.oAsset)){
             this.router.navigateByUrl('inventory/new');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('inventory/new');
@@ -91,7 +91,7 @@ export class AssetEditComponent implements OnInit {
     }
 
     public delete(): void {
-        this.notification.confirm('Are you sure you want to delete this asset?').subscribe(
+        this.alert.confirm('Are you sure you want to delete this asset?').subscribe(
             (response: boolean) => {
                 if(response){
                     this.loading = true;
@@ -101,14 +101,14 @@ export class AssetEditComponent implements OnInit {
                                 this.router.navigateByUrl('inventory');
                             } else {
                                 this.asset = asset;
-                                this.notification.error('Error while deleting asset');
+                                this.alert.error('Error while deleting asset');
                             }
                             this.loading = false;
                         }, 
                         (error) => {
                             console.log(error);
                             this.loading = false;
-                            this.notification.error('Error while deleting asset');
+                            this.alert.error('Error while deleting asset');
                         }
                     );
                 }
@@ -120,7 +120,7 @@ export class AssetEditComponent implements OnInit {
         if(JSON.stringify(this.asset) == JSON.stringify(this.oAsset)){
             this.router.navigateByUrl('inventory');
         } else {
-            this.notification.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
+            this.alert.confirm('There are unsaved changes. Are you sure you want to leave?').subscribe(
                 (response: boolean) => {
                     if(response){
                         this.router.navigateByUrl('inventory');

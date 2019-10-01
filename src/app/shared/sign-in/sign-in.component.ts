@@ -3,7 +3,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 import * as config from '../../config.json';
 
 @Component({
@@ -30,7 +30,7 @@ export class SignInComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private router: Router,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
 
     public ngOnInit(): void {
         let hosttree = window.location.host.split('.');
@@ -53,9 +53,9 @@ export class SignInComponent implements OnInit {
                 this.router.navigate(['/tickets']);
             }, (error) => {
                 if(error.error == 'Incorrect Username or Password'){
-                    this.notification.error('Incorrect Username or Password');
+                    this.alert.error('Incorrect Username or Password');
                 } else {
-                    this.notification.error('An occurred while signing in');
+                    this.alert.error('An occurred while signing in');
                 }
                 console.log(error);
                 this.authenticating = false;

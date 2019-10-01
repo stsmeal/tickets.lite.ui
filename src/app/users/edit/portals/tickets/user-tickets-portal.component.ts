@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from "@angular/core";
 import { UserService } from 'src/app/users/user.service';
 import { User } from 'src/app/models/user';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 import { Ticket } from 'src/app/models/ticket';
 
 @Component({
@@ -22,7 +22,7 @@ export class UserTicketsPortalComponent {
                     this.tickets = tickets;
                     this.tickets = this.tickets.slice();
                 }, (error) => {
-                    this.notification.error('An error occurred while loading tickets');
+                    this.alert.error('An error occurred while loading tickets');
                 }
             );
         }
@@ -38,7 +38,7 @@ export class UserTicketsPortalComponent {
 
     constructor(
         private userService: UserService,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
 
     public formatDate(date?: Date): string {
         return (date) ? (new Date(date)).toLocaleString() : '';

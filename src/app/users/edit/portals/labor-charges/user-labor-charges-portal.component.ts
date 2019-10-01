@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter } from "@angular/core";
 import { LaborCharge } from 'src/app/models/labor-charge';
 import { UserService } from 'src/app/users/user.service';
 import { User } from 'src/app/models/user';
-import { NotificationService } from 'src/app/services/notification.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
     selector: 'user-labor-charges-portal',
@@ -30,7 +30,7 @@ export class UserLaborChargesPortalComponent {
                     this.laborCharges = laborCharges;
                     this.laborCharges = this.laborCharges.slice();
                 }, (error) => {
-                    this.notification.error('An error occurred while loading labor charges');
+                    this.alert.error('An error occurred while loading labor charges');
                 }
             );
         }
@@ -44,7 +44,7 @@ export class UserLaborChargesPortalComponent {
 
     constructor(
         private userService: UserService,
-        private notification: NotificationService) {}
+        private alert: AlertService) {}
     
     public getLaborChargeType(id: number): string {
         let chargeType = this.LaborChargeTypes.find(nt => nt.id == id);

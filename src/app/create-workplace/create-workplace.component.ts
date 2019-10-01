@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators, ControlContainer, AbstractControl } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { NotificationService } from '../services/notification.service';
+import { AlertService } from '../services/alert.service';
 import * as config from '../config.json';
 import { HttpClient } from '@angular/common/http';
 
@@ -36,7 +36,7 @@ export class CreateWorkplaceComponent {
 
     constructor(
         private http: HttpClient,
-        private notification: NotificationService) { }
+        private alert: AlertService) { }
 
     public onSubmit(): void {
         this.http.post(config.apiEndpoint + '/auth/validsite', {site: this.form.value.site}).subscribe(
@@ -67,18 +67,18 @@ export class CreateWorkplaceComponent {
                                 let protocal = window.location.protocol;
                                 window.open(`${protocal}//${this.form.value.site}.${this.url}/sign-in`, '_self');
                             } else {
-                                this.notification.error('Error occurred while creating workplace');
+                                this.alert.error('Error occurred while creating workplace');
                             }
                         }, (error)=>{
-                            this.notification.error('Error occurred while creating workplace');
+                            this.alert.error('Error occurred while creating workplace');
                         }
                     );
                 } else {
-                    this.notification.error('Site is taken');
+                    this.alert.error('Site is taken');
                     this.form.value.site = "";
                 }
             }, (error)=>{
-                this.notification.error('Error occurred while creating workplace');
+                this.alert.error('Error occurred while creating workplace');
             }
         );
     }
