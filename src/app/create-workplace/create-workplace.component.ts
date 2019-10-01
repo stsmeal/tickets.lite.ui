@@ -15,7 +15,7 @@ export class CreateWorkplaceComponent {
     }
 
     public form = new FormGroup({
-        site: new FormControl('', Validators.required),
+        site: new FormControl('', [Validators.required, this.siteValidator]),
         company: new FormControl('', Validators.required),
         username: new FormControl('', Validators.required),
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -28,7 +28,11 @@ export class CreateWorkplaceComponent {
     private passwordMatchValidator(g: FormGroup) {
         return g.get('password').value === g.get('passwordConfirm').value
            ? null : {'mismatch': true};
-     }
+    }
+
+    private siteValidator(c: AbstractControl){
+        return /^([A-Z]+\-{0,1}[a-z]+)+$/i.test(c.value) ? null : {'invalidSite': true};
+    }
 
     constructor(
         private http: HttpClient,
@@ -81,10 +85,12 @@ export class CreateWorkplaceComponent {
 
     public getErrorMessage(control: AbstractControl){
         if(control.errors.required){
-            return "Enter Value";
+            return "Enter value";
         } else if(control.errors.email) {
-            return "Enter Valid Email"
-        } else {
+            return "Enter valid email";
+        } else if(control.errors.invalidSite){
+            return "Invalid site name";
+        }else {
             return "Dude..";
         }
     }
