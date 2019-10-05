@@ -4,6 +4,17 @@
         <mat-toolbar color='accent'>
             <h1 color='primary'>Tickets</h1>
             <span style="flex: 1 1 auto"></span>
+            <button mat-button [matMenuTriggerFor]="menu" style="padding-left: 8px; padding-right: 8px;">
+                <mat-icon color="primary" style="font-size: 20px">visibility</mat-icon>
+                {{watchText()}}
+                <mat-icon color="primary" style="font-size: 20px">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="setWatch()">None</button>
+                <button mat-menu-item (click)="setWatch(WatchType.statusOnly)">Status Only</button>
+                <button mat-menu-item (click)="setWatch(WatchType.all)">All</button>
+                <button mat-menu-item (click)="setWatch(WatchType.ignore)">Ignore</button>
+            </mat-menu>
             <a href="/tickets/new"><button mat-icon-button matTooltip="Create Ticket"
                     (click)="$event.preventDefault(); openNew();">
                     <mat-icon>add</mat-icon>

@@ -97,4 +97,11 @@ export class AlertService {
 
     return modal.afterClosed();
   }
+
+  public beep(): void {
+    let beep = <any>document.getElementById("beep");
+    if(beep){
+      beep.play();
+    }
+  }
 }

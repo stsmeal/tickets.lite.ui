@@ -1,19 +1,49 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from '../services/api.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { NotificationService } from './notification.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
     selector: 'notification-toolbar-button',
     template: `
-    
-    <a href="/">
-        <button  mat-flat-button color='primary' style="margin-right: 5px;"><mat-icon>work</mat-icon></button></a>
+    <a href="/notifications" (click)="$event.preventDefault()">
+        <button  mat-icon-button [routerLink]="['/notifications']">
+            <mat-icon *ngIf="!((unreadCount | async) > 0)">notifications</mat-icon>
+            <mat-icon *ngIf="(unreadCount | async) > 0" [matBadge]="unreadCount | async" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+    </a>
     `
 })
-export class NotificationToolbarButtonComponent implements OnInit{
-    public unread: boolean = false;
+export class NotificationToolbarButtonComponent implements OnInit {
+    public unreadCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-    constructor(private api: ApiService){}
+    private subscription: Subscription = new Subscription();
+
+    constructor(
+        private notification: NotificationService,
+        private alert: AlertService) { }
 
     public ngOnInit(): void {
+        this.notification.unreadCount().subscribe(
+            (count: number) => {
+                this.unreadCount.next(count);
+                setInterval(() => {
+                    this.subscription.unsubscribe();
+                    this.subscription = this.notification.unreadCount().subscribe(
+                        (count: number) => {
+                            if (count && count > 0 && count > this.unreadCount.value) {
+                                this.alert.beep();
+                            }
+                            this.unreadCount.next(count);
+                        }, (error) => {
+                            console.log(error);
+                            this.unreadCount.next(0);
+                        }
+                    );
+                }, 10000);
+            }, (error) => {
+                console.log(error);
+                this.unreadCount.next(0);
+            });
     }
 }

@@ -24,6 +24,7 @@
         <a href="/users" *ngIf="!isSmallScreen"><button  mat-button color='accent' style="margin-right: 5px;" (click)="$event.preventDefault()"
           [routerLink]="['/users']">Users</button></a>
         <span style="flex: 1 1 auto"></span>
+        <notification-toolbar-button></notification-toolbar-button>
         <settings-menu></settings-menu>
       </mat-toolbar>
   </div>

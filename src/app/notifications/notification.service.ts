@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs';
+import { Notification } from '../models/notification';
 
 @Injectable({
     providedIn: 'root'
@@ -12,11 +13,11 @@ export class NotificationService{
         return this.api.get('notifications');
     }
 
-    public isUnreadNotification(): Observable<boolean> {
-        return this.api.get('notifications/new');
+    public unreadCount(): Observable<number> {
+        return this.api.get('notifications/unreadCount');
     }
 
-    public updateNotifications(notifications: Notification[]): Observable<Notification[]> {
-        return this.api.post('notifications/update', notifications);
+    public updateNotification(notification: Notification): Observable<Notification> {
+        return this.api.put('notifications', notification);
     }
 }

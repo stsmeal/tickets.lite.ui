@@ -1,0 +1,39 @@
+<div class="box-container">
+    <div class="header">
+        <mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
+        <mat-toolbar color='accent'>
+            <h1 color='primary'>Notifications</h1>
+            <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div *ngFor="let notificationGroup of notifications" class="row" style="margin-bottom: 30px">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <mat-card>
+                        <mat-card-header>
+                            <h1 *ngIf="notificationGroup[0].type == NotificationType.ticket" mat-card-title>Ticket:
+                                {{notificationGroup[0].name}}</h1>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div *ngFor="let notification of notificationGroup[1]" class="row">
+                                <mat-divider></mat-divider>
+                                <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                    <span>
+                                        <span style="line-height: 25px">{{formatDate(notification.dateCreated) + ', @'}}</span>
+                                        <a [href]="'/users/'+notification.user._id"
+                                        style="line-height: 25px; text-decoration: underline;">{{notification.user.username }}</a>
+                                        <span style="line-height: 25px">{{' ' + notification.message}}</span>
+                                        <button *ngIf="!notification.read" mat-stroked-button color="primary"
+                                            style="line-height: 25px;" (click)="setNotificationRead(notification)"
+                                            class="pull-right">Read</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,12 @@
-import { Audit } from './audit';
 import { User } from './user';
 
-export class Watch extends Audit{
+export enum WatchType {
+    statusOnly = 1,
+    all = 2,
+    ignore = 3
+}
+
+export class Watch {
     user: User;
-    type: number;
+    type: WatchType;
 }
