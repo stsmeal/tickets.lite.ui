@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     templateUrl: 'tickets-main.component.html'
 })
 export class TicketsMainComponent implements OnInit {
-    public loading: boolean = false;
+    public loading: boolean = true;
     public tickets: Ticket[] = [];
     public routeLink = (ticket: Ticket): string => {
         return "/tickets/"+ticket._id;

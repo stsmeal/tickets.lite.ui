@@ -33,6 +33,8 @@ import { UserTicketsPortalComponent } from './users/edit/portals/tickets/user-ti
 import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 import { SettingsMenuComponent } from './shared/settings-menu/settings-menu.component';
 import { CreateWorkplaceComponent } from './create-workplace/create-workplace.component';
+import { NotificationToolbarButtonComponent } from './notifications/notification-toolbar-button.component';
+import { NotificationsMainComponent } from './notifications/main/notifications-main.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -46,7 +48,8 @@ const routes: Routes = [
   { path: 'users/new', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'users/:id', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: LogInComponent },
-  { path: 'create-workplace', component: CreateWorkplaceComponent }
+  { path: 'create-workplace', component: CreateWorkplaceComponent },
+  { path: 'notifications', component: NotificationsMainComponent }
 ];
 
 @NgModule({
@@ -75,7 +78,9 @@ const routes: Routes = [
     UserTicketsPortalComponent,
     ConfirmModalComponent,
     SettingsMenuComponent,
-    CreateWorkplaceComponent
+    CreateWorkplaceComponent,
+    NotificationToolbarButtonComponent,
+    NotificationsMainComponent
   ],
   imports: [
     BrowserModule,

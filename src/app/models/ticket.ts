@@ -3,6 +3,7 @@ import { Note } from './note';
 import { LaborCharge } from './labor-charge';
 import { User } from './user';
 import { Asset } from './asset';
+import { Watch } from './watch';
 
 export class Ticket extends Audit {
     number: number;
@@ -14,4 +15,5 @@ export class Ticket extends Audit {
     laborCharges: LaborCharge[] = [];
     assignments: User[] = [];
     assets: Asset[] = [];
+    watches: Watch[];
 }
