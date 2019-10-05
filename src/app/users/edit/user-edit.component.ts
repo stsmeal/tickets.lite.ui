@@ -12,7 +12,7 @@ import { Ticket } from 'src/app/models/ticket';
 })
 export class UserEditComponent implements OnInit {
     public isEdit: boolean = false;
-    public loading: boolean = false;
+    public loading: boolean = true;
     public user: User = new User();
 
     private oUser: User = new User();

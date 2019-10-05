@@ -8,7 +8,7 @@ import { InventoryService } from '../inventory.service';
     templateUrl: 'assets-main.component.html'
 })
 export class AssetsMainComponent implements OnInit {
-    public loading: boolean = false;
+    public loading: boolean = true;
     public assets: Asset[];
     public routeLink = (asset: Asset): string => {
         return "/inventory/"+asset._id;
