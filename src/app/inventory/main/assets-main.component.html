@@ -14,8 +14,14 @@
         <div class="container-fluid">
             <mat-card>
                 <mat-card-content>
-                    <grid [data]="assets" [queryFn]="query" [routeLinkFn]="routeLink" [(columns)]="columns" [(loading)]="loading"
-                        (selection)="selection($event)"></grid>
+                    <div class="row side-padding">
+                        <mat-form-field>
+                            <input matInput placeholder="Filter" [(ngModel)]="filter">
+                            <mat-icon matPrefix>filter_list</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <grid [routeLinkFn]="routeLink" [queryFn]="query" [(columns)]="columns" [(filter)]="filter"
+                        [(loading)]="loading" (selection)="selection($event)"></grid>
                 </mat-card-content>
             </mat-card>
         </div>

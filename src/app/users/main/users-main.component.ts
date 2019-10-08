@@ -8,6 +8,7 @@ import { UserService } from '../user.service';
     templateUrl: 'users-main.component.html'
 })
 export class UsersMainComponent implements OnInit {
+    public filter: string = '';
     public loading: boolean = true;
     public users: User[];
     public routeLink = (user: User): string => {

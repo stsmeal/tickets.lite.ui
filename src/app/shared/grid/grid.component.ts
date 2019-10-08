@@ -11,12 +11,19 @@ import { QueryCriteria } from 'src/app/models/query';
     selector: 'grid',
     templateUrl: 'grid.component.html'
 })
-export class GridComponent implements OnInit, OnChanges, AfterViewInit {
+export class GridComponent implements OnInit, AfterViewInit {
     @Input() data: any;
     @Input() columns: GridColumn[];
-    @Input() filter: string = '';
     @Input() routeLinkFn: (item: any) => string;
     @Input() queryFn: (qc: QueryCriteria) => any;
+    @Input() 
+    get filter(): string {
+        return this._filter;
+    }
+    set filter(val: string) {
+        this._filter = val;
+        this.filterChange.emit(val);
+    }
     @Input() 
     get loading(): boolean {
         return this._loading;
@@ -27,6 +34,7 @@ export class GridComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
 
+    @Output() filterChange: EventEmitter<string> = new EventEmitter<string>();
     @Output() columnsChange: EventEmitter<GridColumn[]> = new EventEmitter<GridColumn[]>();
     @Output() selection: EventEmitter<any> = new EventEmitter<any[]>();
     @Output() loadingChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -36,6 +44,8 @@ export class GridComponent implements OnInit, OnChanges, AfterViewInit {
 
     public _loading: boolean = false;
     public total: number;
+
+    private _filter: string = '';
 
     get displayedColumns(): string[] {
         return this.columns.map(c => c.name);
@@ -58,36 +68,13 @@ export class GridComponent implements OnInit, OnChanges, AfterViewInit {
             }
         }
         this.source.sort = this.sort;
-        this.source.filter = this.filter.trim().toLowerCase();
-        this.source.filterPredicate = (data: any, filter: string): boolean => {
-            let hasFilter = false;
-
-            for(let column of this.columns){
-                if((column.formatter(data) || '').toLowerCase().includes(filter)){
-                    hasFilter = true;
-                }
-            }
-
-            return hasFilter;
-        }
-    }
-
-    public ngOnChanges(changes: { [propName: string]: SimpleChange }): void {
-        if (changes['data'] && !changes['data'].firstChange && changes['data'].currentValue !== changes['data'].previousValue){
-            this.source.data = changes['data'].currentValue;
-        }
-
-        if(changes['filter'] && !changes['filter'].firstChange && changes['filter'].currentValue !== changes['filter'].previousValue){
-            this.source.filter = changes['filter'].currentValue.trim().toLowerCase();
-            this.filter = changes['filter'].currentValue.trim().toLowerCase();
-        }
     }
 
     public ngAfterViewInit(): void {
         // If the user changes the sort order, reset back to the first page.
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     
-        merge(this.sort.sortChange, this.paginator.page)
+        merge(this.sort.sortChange, this.paginator.page, this.filterChange)
           .pipe(
             startWith({}),
             switchMap(() => {
@@ -96,7 +83,8 @@ export class GridComponent implements OnInit, OnChanges, AfterViewInit {
                   sortColumn: this.sort.active,
                   sortDirection: this.sort.direction,
                   page: this.paginator.pageIndex,
-                  pageSize: this.paginator.pageSize
+                  pageSize: this.paginator.pageSize,
+                  wildcardFilter: this.filter
               };
               return this.queryFn(queryCriteria);
             }),

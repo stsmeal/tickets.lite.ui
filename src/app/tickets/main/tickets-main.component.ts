@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TicketsMainComponent implements OnInit {
     public loading: boolean = true;
+    public filter: string = '';
     public tickets: Ticket[] = [];
     public routeLink = (ticket: Ticket): string => {
         return "/tickets/"+ticket._id;
