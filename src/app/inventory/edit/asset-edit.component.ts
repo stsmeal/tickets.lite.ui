@@ -11,7 +11,7 @@ import { cloneDeep } from 'lodash';
 })
 export class AssetEditComponent implements OnInit {
     public isEdit: boolean = false;
-    public loading: boolean = true;
+    public loading: boolean = false;
     public asset: Asset = new Asset();
 
     private oAsset: Asset = new Asset();
