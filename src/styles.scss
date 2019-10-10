@@ -10,6 +10,12 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
 @include angular-material-theme($my-app-theme);
 
+$custom-typography: mat-typography-config(
+  $font-family: 'Heebo, sans-serif'
+);
+
+@include angular-material-typography($custom-typography);
+
 .mat-toolbar {
     box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.05), 0 1px 20px 0 rgba(0, 0, 0, 0.11);
 }
