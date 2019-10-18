@@ -13,10 +13,12 @@ export class AuthService {
 
     private readonly TOKEN_KEY = 'cms_lite_token';
     private readonly USER_KEY = 'cms_lite_user';
+    private readonly ADMIN_KEY = 'cms_lite_admin';
     private readonly REMEMBER_ME_KEY = 'cms_lite_remember_me';
 
     private _token: string;
     private _user: User;
+    private _isAdmin: boolean;
     private _rememberMe: boolean;
 
     private localForage = localForage;
@@ -35,6 +37,14 @@ export class AuthService {
     set user(value: User) {
         this._user = value;
         this.localForage.setItem<any>(this.USER_KEY, value);
+    }
+
+    get isAdmin(): boolean {
+        return this._isAdmin;
+    }
+    set isAdmin(value: boolean) {
+        this._isAdmin = value;
+        this.localForage.setItem<boolean>(this.ADMIN_KEY, value);
     }
 
     get rememberMe(): boolean {
@@ -62,10 +72,15 @@ export class AuthService {
                 this.localForage.getItem<any>(this.USER_KEY).then(
                     (user: any) => {
                         this.user = <User>user;
-                        this.localForage.getItem<boolean>(this.REMEMBER_ME_KEY).then(
-                            (rememberMe: boolean) => {
-                                this.rememberMe = rememberMe;
-                                this.loading = false;
+                        this.localForage.getItem<boolean>(this.ADMIN_KEY).then(
+                            (isAdmin: boolean) => {
+                                this.isAdmin = isAdmin;
+                                this.localForage.getItem<boolean>(this.REMEMBER_ME_KEY).then(
+                                    (rememberMe: boolean) => {
+                                        this.rememberMe = rememberMe;
+                                        this.loading = false;
+                                    }
+                                ).catch(() => this.loading = false);
                             }
                         ).catch(() => this.loading = false);
                     }
@@ -77,6 +92,15 @@ export class AuthService {
     public async isAuthenticatedAsync() {
         let token = await this.localForage.getItem<string>(this.TOKEN_KEY);
         if (token && token.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public async isAdminAsync() {
+        let isAdmin = await this.localForage.getItem<boolean>(this.ADMIN_KEY);
+        if (isAdmin) {
             return true;
         } else {
             return false;

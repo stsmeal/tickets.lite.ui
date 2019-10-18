@@ -1,0 +1,25 @@
+<div class="box-container">
+    <div class="header">
+        <mat-progress-bar *ngIf="loading" mode="indeterminate" style="position: absolute"></mat-progress-bar>
+        <mat-toolbar color='accent'>
+            <h1 color='primary'>Tenants</h1>
+            <span style="flex: 1 1 auto"></span>
+        </mat-toolbar>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <mat-card>
+                <mat-card-content>
+                    <div class="row side-padding">
+                        <mat-form-field>
+                            <input matInput placeholder="Filter" [(ngModel)]="filter">
+                            <mat-icon matPrefix>filter_list</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <grid [routeLinkFn]="routeLink" [queryFn]="query" [(columns)]="columns" [(filter)]="filter"
+                        [(loading)]="loading" (selection)="selection($event)"></grid>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

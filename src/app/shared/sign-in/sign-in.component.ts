@@ -45,12 +45,17 @@ export class SignInComponent implements OnInit {
         this.signInText = "Signing In...";
         this.auth.authenticate(this.form.value.username, this.form.value.password).subscribe(
             (response: any) => {
-                const {token, user} = response;
+                const {token, user, isAdmin} = response;
                 this.auth.token = token;
                 this.auth.user = <User>user;
+                this.auth.isAdmin = isAdmin;
                 this.auth.rememberMe = this.form.value.rememberMe;
                 this.authenticating = false;
-                this.router.navigate(['/tickets']);
+                if(isAdmin){
+                    this.router.navigate(['/tenants']);
+                } else {
+                    this.router.navigate(['/tickets']);
+                }
             }, (error) => {
                 if(error.error == 'Incorrect Username or Password'){
                     this.alert.error('Incorrect Username or Password');

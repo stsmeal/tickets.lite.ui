@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { AdminGuardService as AdminGuard } from './services/admin-guard.service';
 
 import { AppComponent } from './app.component';
 import { AngularMaterialModule } from './angular-material.module';
@@ -35,6 +36,8 @@ import { SettingsMenuComponent } from './shared/settings-menu/settings-menu.comp
 import { CreateWorkplaceComponent } from './create-workplace/create-workplace.component';
 import { NotificationToolbarButtonComponent } from './notifications/notification-toolbar-button.component';
 import { NotificationsMainComponent } from './notifications/main/notifications-main.component';
+import { TenantsMainComponent } from './tenants/main/tenants-main.component';
+import { TenantEditComponent } from './tenants/edit/tenant-edit.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -49,7 +52,9 @@ const routes: Routes = [
   { path: 'users/:id', component: UserEditComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: LogInComponent },
   { path: 'create-workplace', component: CreateWorkplaceComponent },
-  { path: 'notifications', component: NotificationsMainComponent }
+  { path: 'notifications', component: NotificationsMainComponent },
+  { path: 'tenants', component: TenantsMainComponent, canActivate: [AdminGuard]},
+  { path: 'tenants/:id', component: TenantEditComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
@@ -80,7 +85,9 @@ const routes: Routes = [
     SettingsMenuComponent,
     CreateWorkplaceComponent,
     NotificationToolbarButtonComponent,
-    NotificationsMainComponent
+    NotificationsMainComponent,
+    TenantsMainComponent,
+    TenantEditComponent
   ],
   imports: [
     BrowserModule,
