@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { AdminGuardService as AdminGuard } from './services/admin-guard.service';
 
@@ -96,7 +97,8 @@ const routes: Routes = [
     AngularMaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

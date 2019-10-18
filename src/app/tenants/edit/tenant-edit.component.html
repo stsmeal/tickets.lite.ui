@@ -27,10 +27,8 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="row form-group side-padding">
-                                <mat-slide-toggle
-                                    color="primary"
-                                    [(checked)]="tenant.accountActive">
-                                  Active
+                                <mat-slide-toggle color="primary" [(checked)]="tenant.accountActive">
+                                    Active
                                 </mat-slide-toggle>
                             </div>
                         </div>
@@ -39,7 +37,8 @@
                         <div class="col-sm-12">
                             <div class="row form-group side-padding">
                                 <mat-form-field>
-                                    <textarea matInput placeholder="Description" [(ngModel)]="tenant.description"></textarea>
+                                    <textarea matInput placeholder="Description"
+                                        [(ngModel)]="tenant.description"></textarea>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -81,6 +80,54 @@
                                     <input matInput placeholder="Country" [(ngModel)]="tenant.country">
                                 </mat-form-field>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row side-padding">
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <mat-form-field>
+                                    <input matInput placeholder="Tickets" [(ngModel)]="info.totalTickets"
+                                        disabled="true">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <mat-form-field>
+                                    <input matInput placeholder="Active Tickets" [(ngModel)]="info.totalActiveTickets"
+                                        disabled="true">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <mat-form-field>
+                                    <input matInput placeholder="Users" [(ngModel)]="info.totalUsers" disabled="true">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <mat-form-field>
+                                    <input matInput placeholder="Active Users" [(ngModel)]="info.totalActiveUsers"
+                                        disabled="true">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row side-padding">
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <h2>Past Day</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!loading" class="row side-padding">
+                        <div style="display: block;">
+                            <canvas baseChart width="600" height="200" [datasets]="info.ticketsPastDay.chartData"
+                                [labels]="info.ticketsPastDay.chartLabels" [options]="lineChartOptions"
+                                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+                            </canvas>
                         </div>
                     </div>
                     <div class="row side-padding">

@@ -4,6 +4,7 @@ import { Tenant } from '../models/tenant';
 import { Observable } from 'rxjs';
 import { QueryCriteria } from '../models/query';
 import { ApiService } from '../services/api.service';
+import { TenantInfo } from '../models/tenant-info';
 
 @Injectable({
     providedIn: 'root'
@@ -59,6 +60,10 @@ export class TenantService {
 
     public getTenant(id: string): Observable<Tenant> {
         return this.api.get('tenants/'+id);
+    }
+
+    public getTenantInfo(id: string): Observable<TenantInfo> {
+        return this.api.get('tenants/info/'+id);
     }
 
     public saveTenant(tenant: Tenant): Observable<Tenant> {
