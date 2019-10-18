@@ -4,7 +4,8 @@
         <mat-toolbar color='accent'>
             <h1 color='primary'>Tenants</h1>
             <span style="flex: 1 1 auto"></span>
-            <button mat-icon-button matTooltip="Send Notification" (click)="tenantService.openSendNotification(tenant._id)" color="primary">
+            <button mat-icon-button matTooltip="Send Notification"
+                (click)="tenantService.openSendNotification(tenant._id)" color="primary">
                 <mat-icon>send</mat-icon>
             </button>
         </mat-toolbar>
@@ -89,14 +90,6 @@
                         <div class="col-sm-3">
                             <div class="row form-group side-padding">
                                 <mat-form-field>
-                                    <input matInput placeholder="Tickets" [(ngModel)]="info.totalTickets"
-                                        disabled="true">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row form-group side-padding">
-                                <mat-form-field>
                                     <input matInput placeholder="Active Tickets" [(ngModel)]="info.totalActiveTickets"
                                         disabled="true">
                                 </mat-form-field>
@@ -105,7 +98,8 @@
                         <div class="col-sm-3">
                             <div class="row form-group side-padding">
                                 <mat-form-field>
-                                    <input matInput placeholder="Users" [(ngModel)]="info.totalUsers" disabled="true">
+                                    <input matInput placeholder="Tickets" [(ngModel)]="info.totalTickets"
+                                        disabled="true">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -114,6 +108,13 @@
                                 <mat-form-field>
                                     <input matInput placeholder="Active Users" [(ngModel)]="info.totalActiveUsers"
                                         disabled="true">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="row form-group side-padding">
+                                <mat-form-field>
+                                    <input matInput placeholder="Users" [(ngModel)]="info.totalUsers" disabled="true">
                                 </mat-form-field>
                             </div>
                         </div>
