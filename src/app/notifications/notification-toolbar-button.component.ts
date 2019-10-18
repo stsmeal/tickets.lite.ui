@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { NotificationService } from './notification.service';
 import { AlertService } from '../services/alert.service';
@@ -14,7 +14,7 @@ import { AlertService } from '../services/alert.service';
     </a>
     `
 })
-export class NotificationToolbarButtonComponent implements OnInit {
+export class NotificationToolbarButtonComponent implements OnInit, AfterViewInit {
     public unreadCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
     private subscription: Subscription = new Subscription();
@@ -24,6 +24,10 @@ export class NotificationToolbarButtonComponent implements OnInit {
         private alert: AlertService) { }
 
     public ngOnInit(): void {
+        
+    }
+
+    public ngAfterViewInit(): void {
         this.notification.unreadCount().subscribe(
             (count: number) => {
                 this.unreadCount.next(count);
