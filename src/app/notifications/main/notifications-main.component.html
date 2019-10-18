@@ -43,7 +43,7 @@
                                 <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
                                     <span>
                                         <span style="line-height: 25px">{{formatDate(notification.dateCreated)}}</span>
-                                        <span style="line-height: 25px">{{' ' + notification.message}}</span>
+                                        <span style="line-height: 25px">{{', ' + notification.message}}</span>
                                         <button *ngIf="!notification.read" mat-stroked-button color="primary"
                                             style="line-height: 25px;" (click)="setNotificationRead(notification)"
                                             class="pull-right">Read</button>
