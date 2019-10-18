@@ -39,6 +39,7 @@ import { NotificationToolbarButtonComponent } from './notifications/notification
 import { NotificationsMainComponent } from './notifications/main/notifications-main.component';
 import { TenantsMainComponent } from './tenants/main/tenants-main.component';
 import { TenantEditComponent } from './tenants/edit/tenant-edit.component';
+import { TenantNotificationModalComponent } from './tenants/tenant-notification-modal/tenant-notification-modal.component';
 
 const routes: Routes = [
   { path: '', component: RootComponent},
@@ -88,7 +89,8 @@ const routes: Routes = [
     NotificationToolbarButtonComponent,
     NotificationsMainComponent,
     TenantsMainComponent,
-    TenantEditComponent
+    TenantEditComponent,
+    TenantNotificationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +104,6 @@ const routes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StartComponent, ConfirmModalComponent]
+  entryComponents: [StartComponent, ConfirmModalComponent, TenantNotificationModalComponent]
 })
 export class AppModule { }

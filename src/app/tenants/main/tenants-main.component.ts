@@ -5,7 +5,7 @@ import { TenantService } from '../tenant.service';
 import { Tenant } from 'src/app/models/tenant';
 
 @Component({
-    templateUrl: 'Tenants-main.component.html'
+    templateUrl: 'tenants-main.component.html'
 })
 export class TenantsMainComponent implements OnInit {
     public filter: string = '';
@@ -21,7 +21,7 @@ export class TenantsMainComponent implements OnInit {
     public columns: GridColumn[];
 
     constructor(
-        private tenantService: TenantService,
+        public tenantService: TenantService,
         private router: Router) { }
 
     public ngOnInit(): void {

@@ -8,6 +8,7 @@ import { cloneDeep } from 'lodash';
 import { TenantInfo } from 'src/app/models/tenant-info';
 import { ChartOptions } from 'chart.js';
 import { Color } from 'ng2-charts';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
     templateUrl: 'tenant-edit.component.html'
@@ -32,12 +33,10 @@ export class TenantEditComponent implements OnInit {
         {
             borderColor: 'black',
             backgroundColor: 'rgba(120, 144, 156, 0.3)',
-        },
-        {
+        },{
             borderColor: 'blue',
             backgroundColor: 'rgba(138, 216, 255, 0.3)',
-        },
-        {
+        },{
             borderColor: 'green',
             backgroundColor: 'rgba(99, 255, 80, 0.3)',
         },

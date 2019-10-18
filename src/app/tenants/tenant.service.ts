@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { QueryCriteria } from '../models/query';
 import { ApiService } from '../services/api.service';
 import { TenantInfo } from '../models/tenant-info';
+import { ModalService } from '../services/modal.service';
+import { TenantNotificationModalComponent } from './tenant-notification-modal/tenant-notification-modal.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +55,9 @@ export class TenantService {
         }
     ];
 
-    constructor(private api: ApiService) { }
+    constructor(
+        private api: ApiService,
+        private modalService: ModalService) { }
 
     public getColumns(): GridColumn[] {
         return this.columns;
@@ -68,6 +73,14 @@ export class TenantService {
 
     public saveTenant(tenant: Tenant): Observable<Tenant> {
         return this.api.post('tenants', tenant);
+    }
+
+    public openSendNotification(id?: string): MatDialogRef<TenantNotificationModalComponent, any> {
+        return this.modalService.open(TenantNotificationModalComponent, {width: '800px', data: {id: id}});
+    }
+
+    public sendTenantNotification(tenantId: string, message: string): Observable<boolean>{
+        return this.api.post('tenants/notification', {id: tenantId, message: message});
     }
 
     public query(queryCriteria: QueryCriteria): Observable<Tenant[]>{

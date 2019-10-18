@@ -4,6 +4,9 @@
         <mat-toolbar color='accent'>
             <h1 color='primary'>Tenants</h1>
             <span style="flex: 1 1 auto"></span>
+            <button mat-icon-button matTooltip="Send Notification" (click)="tenantService.openSendNotification()" color="primary">
+                <mat-icon>send</mat-icon>
+            </button>
         </mat-toolbar>
     </div>
     <div class="content">

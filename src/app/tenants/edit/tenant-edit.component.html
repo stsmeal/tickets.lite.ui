@@ -4,6 +4,9 @@
         <mat-toolbar color='accent'>
             <h1 color='primary'>Tenants</h1>
             <span style="flex: 1 1 auto"></span>
+            <button mat-icon-button matTooltip="Send Notification" (click)="tenantService.openSendNotification(tenant._id)" color="primary">
+                <mat-icon>send</mat-icon>
+            </button>
         </mat-toolbar>
     </div>
     <div class="content">
@@ -27,7 +30,7 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="row form-group side-padding">
-                                <mat-slide-toggle color="primary" [(checked)]="tenant.accountActive">
+                                <mat-slide-toggle class="pull-right" color="primary" [(checked)]="tenant.accountActive">
                                     Active
                                 </mat-slide-toggle>
                             </div>
