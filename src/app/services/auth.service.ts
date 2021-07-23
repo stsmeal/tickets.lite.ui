@@ -11,10 +11,10 @@ import { User } from '../models/user.js';
 export class AuthService {
     public loading: boolean = false;
 
-    private readonly TOKEN_KEY = 'cms_lite_token';
-    private readonly USER_KEY = 'cms_lite_user';
-    private readonly ADMIN_KEY = 'cms_lite_admin';
-    private readonly REMEMBER_ME_KEY = 'cms_lite_remember_me';
+    private readonly TOKEN_KEY = 'tickets_lite_token';
+    private readonly USER_KEY = 'tickets_lite_user';
+    private readonly ADMIN_KEY = 'tickets_lite_admin';
+    private readonly REMEMBER_ME_KEY = 'tickets_lite_remember_me';
 
     private _token: string;
     private _user: User;
@@ -121,7 +121,7 @@ export class AuthService {
         if (hosttree.length == 3 && hosttree[1].toLowerCase() == config.domainName) {
             return hosttree[0].toLowerCase();
         } else {
-            return 'cmslite';
+            return 'ticketslite';
         }
     }
 }

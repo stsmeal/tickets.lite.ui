@@ -2,7 +2,7 @@
   <div class="header">
     <mat-toolbar *ngIf="!auth.isAuthenticated" color='primary'>
       <a href="/"><button mat-flat-button color='primary' style="margin-right: 10px;">
-          <h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1>
+          <h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Tickets Lite</h1>
         </button></a>
       <span style="flex: 1 1 auto"></span>
       <button mat-flat-button color='primary' style="margin-right: 10px;" [routerLink]="['/sign-in']">Sign in</button>
@@ -28,7 +28,7 @@
           </a></button>
       </mat-menu>
       <a href="/"><button mat-flat-button color='primary' style="margin-right: 10px;">
-          <h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Cms Lite</h1>
+          <h1 style="font-family: 'Monoton', cursive; font-size: 16px;">Tickets Lite</h1>
         </button></a>
       <a href="/tenants" *ngIf="!isSmallScreen && auth.isAdmin"><button mat-button color='accent'
           style="margin-right: 5px;" (click)="$event.preventDefault()" [routerLink]="['/tenants']">Tenants</button></a>

@@ -1,10 +1,10 @@
 {
-  "name": "cms-lite",
+  "name": "tickets-lite",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-cmslite": "ng serve --aot --port 80 --host 0.0.0.0 --disableHostCheck",
+    "start-ticketslite": "ng serve --aot --port 80 --host 0.0.0.0 --disableHostCheck",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

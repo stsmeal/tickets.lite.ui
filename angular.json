@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cms-lite": {
+    "tickets-lite": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cms-lite",
+            "outputPath": "dist/tickets-lite",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cms-lite:build"
+            "browserTarget": "tickets-lite:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cms-lite:build:production"
+              "browserTarget": "tickets-lite:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cms-lite:build"
+            "browserTarget": "tickets-lite:build"
           }
         },
         "test": {
@@ -111,15 +111,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cms-lite:serve"
+            "devServerTarget": "tickets-lite:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cms-lite:serve:production"
+              "devServerTarget": "tickets-lite:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "cms-lite"
+  "defaultProject": "tickets-lite"
 }

@@ -1,5 +1,5 @@
 {
-    "domainName": "cmslite",
+    "domainName": "ticketslite",
     "tld":"com",
     "apiEndpoint": "http://localhost:3000"
 }

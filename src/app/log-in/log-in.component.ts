@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="row">
                         <div class="col-12" style="text-align: center">
-                            <h1>Cms Lite Sign In</h1>
+                            <h1>Tickets Lite Sign In</h1>
                         </div>
                     </div>
                     <div class="row form-group">

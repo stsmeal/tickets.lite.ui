@@ -1,4 +1,4 @@
-# cms.lite.ui
-CMS Lite UI using Angular CLI 
+# tickets.lite.ui
+Tickets Lite UI using Angular CLI 
 
 This is a simple multi-tenant ticketing & asset management system I made to learn Express, Inversify, Typescript and just Node in general. 
